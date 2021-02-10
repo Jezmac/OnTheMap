@@ -15,6 +15,7 @@
 		0870A5D525D41D6F00ADC81C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5D325D41D6F00ADC81C /* LaunchScreen.storyboard */; };
 		0870A5E825D476D100ADC81C /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870A5E725D476D100ADC81C /* LoginButton.swift */; };
 		0870A5EB25D479D700ADC81C /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870A5EA25D479D700ADC81C /* ColorPalette.swift */; };
+		0870A5F125D4806200ADC81C /* klavika-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5F025D4806200ADC81C /* klavika-bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		0870A5D625D41D6F00ADC81C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0870A5E725D476D100ADC81C /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		0870A5EA25D479D700ADC81C /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		0870A5F025D4806200ADC81C /* klavika-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "klavika-bold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		0870A5E225D41DAA00ADC81C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0870A5EF25D4803500ADC81C /* Fonts */,
 				0870A5D325D41D6F00ADC81C /* LaunchScreen.storyboard */,
 				0870A5D125D41D6F00ADC81C /* Assets.xcassets */,
 				0870A5CE25D41D6B00ADC81C /* Main.storyboard */,
@@ -135,6 +138,14 @@
 				0870A5EA25D479D700ADC81C /* ColorPalette.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		0870A5EF25D4803500ADC81C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0870A5F025D4806200ADC81C /* klavika-bold.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0870A5F125D4806200ADC81C /* klavika-bold.otf in Resources */,
 				0870A5D525D41D6F00ADC81C /* LaunchScreen.storyboard in Resources */,
 				0870A5D225D41D6F00ADC81C /* Assets.xcassets in Resources */,
 				0870A5D025D41D6B00ADC81C /* Main.storyboard in Resources */,

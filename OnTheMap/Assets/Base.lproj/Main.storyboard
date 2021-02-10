@@ -7,6 +7,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="klavika-bold.otf">
+            <string>Klavika-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--LoginVC-->
         <scene sceneID="tne-QT-ifu">
@@ -70,52 +75,48 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="LlM-he-Eog">
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>
                             </activityIndicatorView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Log in via Facebook" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LmL-lx-ITd">
-                                <rect key="frame" x="60" y="757" width="294" height="45"/>
-                                <color key="backgroundColor" red="0.057406917209999998" green="0.62772893910000005" blue="0.8039464355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" button="YES"/>
-                                </accessibility>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="HRu-M5-qoE"/>
-                                </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="f_logo_RGB-White_250" translatesAutoresizingMaskIntoConstraints="NO" id="p2b-q9-tQC">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="f_logo_RGB-White_250" translatesAutoresizingMaskIntoConstraints="NO" id="p2b-q9-tQC">
                                 <rect key="frame" x="70" y="760" width="45" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDK-uF-4vv" customClass="LoginButton" customModule="OnTheMap" customModuleProvider="target">
+                                <rect key="frame" x="60" y="767" width="294" height="45"/>
+                                <color key="backgroundColor" red="0.057406917209999998" green="0.62772893910000005" blue="0.8039464355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="xDp-Cj-zRo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Klavika-Bold" family="Klavika" pointSize="20"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="10" minY="8" maxX="254" maxY="8"/>
+                                <state key="normal" title="Log in with facebook" image="f_logo_RGB-White_250"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="p2b-q9-tQC" firstAttribute="bottom" secondItem="LmL-lx-ITd" secondAttribute="bottom" constant="-3" id="1Fp-VC-a1m"/>
                             <constraint firstItem="Qgq-Cr-3Rb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="7VW-ei-U6r"/>
                             <constraint firstItem="LEq-LO-sL1" firstAttribute="centerX" secondItem="Qgq-Cr-3Rb" secondAttribute="centerX" id="AYJ-tm-wJl"/>
                             <constraint firstItem="Qgq-Cr-3Rb" firstAttribute="centerX" secondItem="Bdp-7t-zE9" secondAttribute="centerX" id="Ais-ZE-2ME"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LmL-lx-ITd" secondAttribute="bottom" constant="60" id="AlZ-zw-iZo"/>
-                            <constraint firstItem="p2b-q9-tQC" firstAttribute="leading" secondItem="LmL-lx-ITd" secondAttribute="leading" constant="10" id="Dyb-qr-bdF"/>
                             <constraint firstItem="LlM-he-Eog" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mma-dL-LE0"/>
                             <constraint firstItem="Bdp-7t-zE9" firstAttribute="top" secondItem="Qgq-Cr-3Rb" secondAttribute="bottom" constant="50" id="Ov5-BT-tlm"/>
+                            <constraint firstItem="kDK-uF-4vv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PHx-7T-wXO"/>
+                            <constraint firstItem="kDK-uF-4vv" firstAttribute="height" secondItem="SKT-xD-bQc" secondAttribute="height" id="UDl-0T-cOS"/>
                             <constraint firstItem="Bdp-7t-zE9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="86.5" id="X1J-E5-7Pr"/>
                             <constraint firstItem="Qgq-Cr-3Rb" firstAttribute="top" secondItem="LEq-LO-sL1" secondAttribute="bottom" constant="50" id="aIs-1B-uM3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Bdp-7t-zE9" secondAttribute="bottom" constant="363" id="b9k-EQ-xnE"/>
+                            <constraint firstItem="kDK-uF-4vv" firstAttribute="width" secondItem="SKT-xD-bQc" secondAttribute="width" id="bHH-qn-Qkj"/>
                             <constraint firstItem="LEq-LO-sL1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="eq0-dM-8ZT"/>
                             <constraint firstItem="LEq-LO-sL1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="esq-bc-rVb"/>
                             <constraint firstItem="LlM-he-Eog" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="hPl-HY-aNX"/>
                             <constraint firstItem="LEq-LO-sL1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mF1-Kw-Efh"/>
-                            <constraint firstItem="LmL-lx-ITd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="mHM-EK-jzn"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LmL-lx-ITd" secondAttribute="trailing" constant="60" id="sT4-l7-lc2"/>
-                            <constraint firstItem="p2b-q9-tQC" firstAttribute="top" secondItem="LmL-lx-ITd" secondAttribute="top" priority="997" constant="3" id="wT8-W3-Ido"/>
-                            <constraint firstItem="p2b-q9-tQC" firstAttribute="trailing" secondItem="LmL-lx-ITd" secondAttribute="trailing" constant="-239" id="zAa-dS-rSa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kDK-uF-4vv" secondAttribute="bottom" constant="50" id="uGE-Qe-emk"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="LlM-he-Eog" id="QMQ-vQ-IVs"/>
                         <outlet property="emailTextField" destination="mtR-C4-EMz" id="2rj-Oo-kVP"/>
                         <outlet property="loginButton" destination="SKT-xD-bQc" id="leE-sl-vha"/>
-                        <outlet property="loginViaFacebookButton" destination="LmL-lx-ITd" id="mIa-KJ-Jr8"/>
                         <outlet property="passwordTextField" destination="q3q-Go-OdV" id="3gu-Y5-hDO"/>
                         <outlet property="signUpButton" destination="uhx-Bp-hI1" id="cG1-t3-3eO"/>
                     </connections>
