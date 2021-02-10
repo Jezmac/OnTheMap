@@ -11,7 +11,8 @@ class LoginVC: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginButton: UITextField!
+    
+    @IBOutlet weak var loginButton: LoginButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginViaFacebookButton: UITextField!
     
@@ -31,6 +32,7 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         
         clearTextFields()
+        
     }
 
     func clearTextFields() {

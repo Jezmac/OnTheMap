@@ -13,6 +13,8 @@
 		0870A5D025D41D6B00ADC81C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5CE25D41D6B00ADC81C /* Main.storyboard */; };
 		0870A5D225D41D6F00ADC81C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5D125D41D6F00ADC81C /* Assets.xcassets */; };
 		0870A5D525D41D6F00ADC81C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5D325D41D6F00ADC81C /* LaunchScreen.storyboard */; };
+		0870A5E825D476D100ADC81C /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870A5E725D476D100ADC81C /* LoginButton.swift */; };
+		0870A5EB25D479D700ADC81C /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870A5EA25D479D700ADC81C /* ColorPalette.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		0870A5D125D41D6F00ADC81C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0870A5D425D41D6F00ADC81C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0870A5D625D41D6F00ADC81C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0870A5E725D476D100ADC81C /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		0870A5EA25D479D700ADC81C /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		0870A5C725D41D6B00ADC81C /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				0870A5ED25D479DE00ADC81C /* Constants */,
 				0870A5D625D41D6F00ADC81C /* Info.plist */,
 				0870A5C825D41D6B00ADC81C /* AppDelegate.swift */,
 				0870A5CA25D41D6B00ADC81C /* SceneDelegate.swift */,
@@ -71,6 +76,7 @@
 		0870A5DD25D41D7D00ADC81C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0870A5E725D476D100ADC81C /* LoginButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -121,6 +127,14 @@
 			children = (
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		0870A5ED25D479DE00ADC81C /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0870A5EA25D479D700ADC81C /* ColorPalette.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,7 +207,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0870A5EB25D479D700ADC81C /* ColorPalette.swift in Sources */,
 				0870A5CD25D41D6B00ADC81C /* LoginVC.swift in Sources */,
+				0870A5E825D476D100ADC81C /* LoginButton.swift in Sources */,
 				0870A5C925D41D6B00ADC81C /* AppDelegate.swift in Sources */,
 				0870A5CB25D41D6B00ADC81C /* SceneDelegate.swift in Sources */,
 			);

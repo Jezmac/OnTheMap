@@ -32,16 +32,15 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="LOG IN" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9m7-Fm-5L5">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKT-xD-bQc" customClass="LoginButton" customModule="OnTheMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="130" width="294" height="45"/>
                                         <color key="backgroundColor" red="0.057406917209999998" green="0.62772893910000005" blue="0.8039464355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" button="YES"/>
-                                        </accessibility>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="LOG IN">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="q3q-Go-OdV" firstAttribute="centerY" secondItem="Qgq-Cr-3Rb" secondAttribute="centerY" id="WWu-BF-50e"/>
@@ -115,7 +114,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="LlM-he-Eog" id="QMQ-vQ-IVs"/>
                         <outlet property="emailTextField" destination="mtR-C4-EMz" id="2rj-Oo-kVP"/>
-                        <outlet property="loginButton" destination="9m7-Fm-5L5" id="eri-9m-dzF"/>
+                        <outlet property="loginButton" destination="SKT-xD-bQc" id="leE-sl-vha"/>
                         <outlet property="loginViaFacebookButton" destination="LmL-lx-ITd" id="mIa-KJ-Jr8"/>
                         <outlet property="passwordTextField" destination="q3q-Go-OdV" id="3gu-Y5-hDO"/>
                         <outlet property="signUpButton" destination="uhx-Bp-hI1" id="cG1-t3-3eO"/>
