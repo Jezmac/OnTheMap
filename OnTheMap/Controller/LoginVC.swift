@@ -11,10 +11,9 @@ class LoginVC: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginButton: LoginButton!
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginViaFacebookButton: UIButton!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
@@ -34,6 +33,7 @@ class LoginVC: UIViewController {
         
     }
 
+    //MARK: - Actions
     
     @IBAction func loginTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
