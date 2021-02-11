@@ -11,10 +11,9 @@ class LoginVC: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var loginButton: LoginButton!
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var loginViaFacebookButton: UITextField!
+    @IBOutlet weak var loginViaFacebookButton: UIButton!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -35,6 +34,16 @@ class LoginVC: UIViewController {
         
     }
 
+    
+    @IBAction func loginTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainTBC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
+        mainTBC.modalPresentationStyle = .fullScreen
+        
+        present(mainTBC, animated: true, completion: nil)
+    }
+    
+    
     func clearTextFields() {
         emailTextField.text = ""
         passwordTextField.text = ""
