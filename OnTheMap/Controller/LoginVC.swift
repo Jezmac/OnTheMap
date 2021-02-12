@@ -36,11 +36,23 @@ class LoginVC: UIViewController {
     //MARK: - Actions
     
     @IBAction func loginTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTBC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
-        mainTBC.modalPresentationStyle = .fullScreen
+        setLogginIn(true)
+        UdacityClient.login(username: emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: handleLoginResponse(result:))
         
-        present(mainTBC, animated: true, completion: nil)
+    }
+    func handleLoginResponse(result: Result<Bool, Error>) {
+        switch result {
+        case .success(_):
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainTBC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
+            mainTBC.modalPresentationStyle = .fullScreen
+            
+            present(mainTBC, animated: true, completion: nil)
+            clearTextFields()
+        case .failure(let error):
+        showLoginFailure(message: error.localizedDescription)
+            setLogginIn(false)
+        }
     }
     
     
@@ -59,6 +71,12 @@ class LoginVC: UIViewController {
         passwordTextField.isEnabled = !loggingIn
         loginButton.isEnabled = !loggingIn
         loginViaFacebookButton.isEnabled = !loggingIn
+    }
+    
+    func showLoginFailure(message: String) {
+        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
     }
 }
 
