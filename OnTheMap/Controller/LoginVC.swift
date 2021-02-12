@@ -50,7 +50,8 @@ class LoginVC: UIViewController {
             present(mainTBC, animated: true, completion: nil)
             clearTextFields()
         case .failure(let error):
-            Alert.showBasicAlert(on: self, with: error.localizedDescription, message: "Please try again")
+            print(error.localizedDescription)
+            Alert.showInvalidIDAlert(on: self)
             setLogginIn(false)
         }
     }

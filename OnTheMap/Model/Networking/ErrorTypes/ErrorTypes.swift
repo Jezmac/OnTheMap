@@ -19,6 +19,8 @@ public enum NetworkError: Error {
     case decodingError
 }
 
+let statusCode = 0
+
 extension NetworkError: LocalizedError {
     public var statusCode: String? {
         switch self {
