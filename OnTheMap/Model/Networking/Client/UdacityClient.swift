@@ -20,10 +20,12 @@ class UdacityClient {
         static let base = "https://onthemap-api.udacity.com/v1"
         
         case login
+        case getStudentLocations
         
         var stringValue: String {
             switch self {
             case .login: return Endpoints.base + "/session"
+            case .getStudentLocations: return Endpoints.base + "StudentLocation?limit=100?order=-updatedAt"
             }
         }
         var url: URL {
@@ -69,7 +71,7 @@ class UdacityClient {
     
     //MARK: GET Request
     
-    class func taskForGETRequest<ResponseType: Decodable>(url: URL, reponse: ResponseType.Type, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error  in
             guard let data = data else {
                 completion(.failure(.connectionError))
@@ -96,12 +98,25 @@ class UdacityClient {
     class func login(username: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         taskForPOSTRequest(url: Endpoints.login.url, response: SessionResponse.self, body: LoginRequest(udacity: LoginDetails(username: username, password: password))) { result in
             switch result {
+            case .failure(let error):
+                completion(.failure(error))
             case .success(let response):
                 Auth.key = response.account.key
                 print(Auth.key)
                 completion(.success(true))
+            }
+        }
+    }
+    
+    class func getStudentLocations(url: URL, completion: @escaping (Result<[Student], Error>) -> Void) {
+        taskForGETRequest(url: Endpoints.getStudentLocations.url, response: LocationResults.self) { result in
+            switch result {
             case .failure(let error):
                 completion(.failure(error))
+            case .success(let response):
+                completion(.success(response.results))
+
+                
             }
         }
     }
