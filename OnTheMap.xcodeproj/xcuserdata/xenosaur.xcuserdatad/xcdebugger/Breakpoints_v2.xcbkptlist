@@ -3,4 +3,134 @@
    uuid = "F797034F-210C-4EF6-86DE-204A3B74F046"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E7EBCB11-B7B1-45AD-B694-4942AA79EF5A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OnTheMap/Controller/TableVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "956D552C-86D5-4098-9996-CD87291C679A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OnTheMap/Model/Networking/Client/UdacityClient.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "getStudentLocations(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "956D552C-86D5-4098-9996-CD87291C679A - cd89346de32a8486"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static OnTheMap.UdacityClient.getStudentLocations(completion: (Swift.Result&lt;Swift.Array&lt;OnTheMap.Student&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "OnTheMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xenosaur/Udacity%20iOS%20nanodegree/OnTheMap/OnTheMap/OnTheMap/Model/Networking/Client/UdacityClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  uuid = "956D552C-86D5-4098-9996-CD87291C679A - 447f90680c1ed19e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;OnTheMap.LocationResults, OnTheMap.NetworkError&gt;) -&gt; () in static OnTheMap.UdacityClient.getStudentLocations(completion: (Swift.Result&lt;Swift.Array&lt;OnTheMap.Student&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "OnTheMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xenosaur/Udacity%20iOS%20nanodegree/OnTheMap/OnTheMap/OnTheMap/Model/Networking/Client/UdacityClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
+                  offsetFromSymbolStart = "124">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8279765F-B715-455A-9EF6-DE0B7C1DE9D0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OnTheMap/Model/Networking/Client/UdacityClient.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "getStudentLocations(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4490FFC3-9AB8-4CB8-AFA6-D4CF9355691B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OnTheMap/Model/Networking/Client/UdacityClient.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "getStudentLocations(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4490FFC3-9AB8-4CB8-AFA6-D4CF9355691B - 447f90680c1ed202"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;OnTheMap.LocationResults, OnTheMap.NetworkError&gt;) -&gt; () in static OnTheMap.UdacityClient.getStudentLocations(completion: (Swift.Result&lt;Swift.Array&lt;OnTheMap.Student&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "OnTheMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xenosaur/Udacity%20iOS%20nanodegree/OnTheMap/OnTheMap/OnTheMap/Model/Networking/Client/UdacityClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "4490FFC3-9AB8-4CB8-AFA6-D4CF9355691B - 447f90680c1ed202"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;OnTheMap.LocationResults, OnTheMap.NetworkError&gt;) -&gt; () in static OnTheMap.UdacityClient.getStudentLocations(completion: (Swift.Result&lt;Swift.Array&lt;OnTheMap.Student&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "OnTheMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xenosaur/Udacity%20iOS%20nanodegree/OnTheMap/OnTheMap/OnTheMap/Model/Networking/Client/UdacityClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "148">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

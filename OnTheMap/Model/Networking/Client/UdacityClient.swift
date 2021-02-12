@@ -74,13 +74,17 @@ class UdacityClient {
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error  in
             guard let data = data else {
+                DispatchQueue.main.async {
                 completion(.failure(.connectionError))
+                }
                 return
             }
             let range = 5..<data.count
             let newData = data.subdata(in: range)
             guard let decodedResponse = try? JSONDecoder().decode(ResponseType.self, from: newData) else {
-                completion(.failure(.decodingError))
+                DispatchQueue.main.async {
+                    completion(.failure(.decodingError))
+                    }
                 return
             }
             completion(.success(decodedResponse))

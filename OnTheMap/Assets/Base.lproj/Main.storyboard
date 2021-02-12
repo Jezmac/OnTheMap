@@ -165,13 +165,14 @@
         <!--On the Map-->
         <scene sceneID="T1h-s8-wcM">
             <objects>
-                <tableViewController id="agQ-Zm-rrf" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tdK-pF-xxy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tableViewController id="agQ-Zm-rrf" customClass="TableVC" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="eis-pI-Jf3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="107" id="k7U-y4-O25">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentViewCell" rowHeight="107" id="k7U-y4-O25">
                                 <rect key="frame" x="0.0" y="28" width="414" height="107"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k7U-y4-O25" id="WtC-S2-9SR">
@@ -193,13 +194,13 @@
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tdK-pF-xxy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2582.608695652174" y="412.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="17Q-1o-umb">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DpC-qL-gNJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="Gu0-7Q-4Jh" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-deselected" id="qxV-aq-clN"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F1c-dy-wzS">
@@ -210,7 +211,6 @@
                         <segue destination="agQ-Zm-rrf" kind="relationship" relationship="rootViewController" id="vgc-gn-fI5"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DpC-qL-gNJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1778" y="413"/>
         </scene>
@@ -236,6 +236,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="S8B-lX-M6n">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JTZ-MA-Ihs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="3dT-s4-iaK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SSp-VI-R5N">
@@ -248,7 +249,6 @@
                         <segue destination="Gu0-7Q-4Jh" kind="relationship" relationship="viewControllers" id="TcQ-Ln-RlM"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JTZ-MA-Ihs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="868" y="80"/>
         </scene>
