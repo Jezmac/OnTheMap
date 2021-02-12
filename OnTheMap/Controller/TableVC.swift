@@ -10,4 +10,17 @@ import UIKit
 
 class TableVC: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    var selectedIndex = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        UdacityClient.getStudentLocations() { result in
+        if case .success(let students) = result {
+            StudentModel.studentList = students
+            self.tableView.reloadData()
+            }
+        }
+    }
 }

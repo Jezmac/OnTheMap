@@ -25,7 +25,7 @@ class UdacityClient {
         var stringValue: String {
             switch self {
             case .login: return Endpoints.base + "/session"
-            case .getStudentLocations: return Endpoints.base + "StudentLocation?limit=100?order=-updatedAt"
+            case .getStudentLocations: return Endpoints.base + "/StudentLocation?limit=100?order=-updatedAt"
             }
         }
         var url: URL {
@@ -108,15 +108,13 @@ class UdacityClient {
         }
     }
     
-    class func getStudentLocations(url: URL, completion: @escaping (Result<[Student], Error>) -> Void) {
+    class func getStudentLocations(completion: @escaping (Result<[Student], Error>) -> Void) {
         taskForGETRequest(url: Endpoints.getStudentLocations.url, response: LocationResults.self) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let response):
                 completion(.success(response.results))
-
-                
             }
         }
     }
