@@ -49,15 +49,13 @@ class UdacityClient {
                 }
                 return
             }
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            print(statusCode)
             let decoder = JSONDecoder()
             do {
                 let range = 5..<data.count
                 let newData = data.subdata(in: range)
-                let responseObject = try decoder.decode(ResponseType.self, from: newData)
+                let decodedResponse = try decoder.decode(ResponseType.self, from: newData)
                 DispatchQueue.main.async {
-                    completion(.success(responseObject))
+                    completion(.success(decodedResponse))
                 }
             } catch {
                 DispatchQueue.main.async {
@@ -69,7 +67,24 @@ class UdacityClient {
         task.resume()
     }
     
+    //MARK: Get Request
     
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, reponse: ResponseType.Type, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error  in
+            guard let data = data else {
+                completion(.failure(.connectionError))
+                return
+            }
+            let range = 5..<data.count
+            let newData = data.subdata(in: range)
+            guard let decodedResponse = try? JSONDecoder().decode(ResponseType.self, from: newData) else {
+                completion(.failure(.decodingError))
+                return
+            }
+            completion(.success(decodedResponse))
+        }
+        task.resume()
+    }
     //MARK:- Requests by type
     
     //MARK: Login Fucntion
@@ -82,7 +97,7 @@ class UdacityClient {
                 print(Auth.key)
                 completion(.success(true))
             case .failure(let error):
-            completion(.failure(error))
+                completion(.failure(error))
             }
         }
     }
