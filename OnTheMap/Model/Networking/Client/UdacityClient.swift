@@ -33,7 +33,7 @@ class UdacityClient {
     
     //MARK:- Generic Request Functions
     
-    //MARK: Post Request
+    //MARK: POST Request
     
     class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, response: ResponseType.Type, body: RequestType, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
         var request = URLRequest(url: url)
@@ -67,7 +67,7 @@ class UdacityClient {
         task.resume()
     }
     
-    //MARK: Get Request
+    //MARK: GET Request
     
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, reponse: ResponseType.Type, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error  in
@@ -85,6 +85,10 @@ class UdacityClient {
         }
         task.resume()
     }
+    
+    //MARK: DELETE Request
+    
+    
     //MARK:- Requests by type
     
     //MARK: Login Fucntion
