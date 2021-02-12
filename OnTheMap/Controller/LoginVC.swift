@@ -50,7 +50,7 @@ class LoginVC: UIViewController {
             present(mainTBC, animated: true, completion: nil)
             clearTextFields()
         case .failure(let error):
-        showLoginFailure(message: error.localizedDescription)
+            Alert.showBasicAlert(on: self, with: error.localizedDescription, message: "Please try again")
             setLogginIn(false)
         }
     }
@@ -73,10 +73,10 @@ class LoginVC: UIViewController {
         loginViaFacebookButton.isEnabled = !loggingIn
     }
     
-    func showLoginFailure(message: String) {
-        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
-    }
+//    func showLoginFailure(message: String) {
+//        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+//        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//        show(alertVC, sender: nil)
+//    }
 }
 

@@ -45,10 +45,12 @@ class UdacityClient {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
-                    completion(.failure(.domainError))
+                    completion(.failure(.connectionError))
                 }
                 return
             }
+            let statusCode = (response as! HTTPURLResponse).statusCode
+            print(statusCode)
             let decoder = JSONDecoder()
             do {
                 let range = 5..<data.count
