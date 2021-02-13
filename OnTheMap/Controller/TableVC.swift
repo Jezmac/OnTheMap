@@ -39,12 +39,10 @@ class TableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentViewCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentViewCell") as! StudentViewCell
         
         let student = StudentModel.student[indexPath.row]
-        cell.textLabel?.text = "\(student.firstName)" + " \(student.lastName)"
-        cell.detailTextLabel?.text = student.mediaURL
-        cell.imageView?.image = UIImage(named: "icon_pin")
+        cell.configure(with: student)
         return cell
     }
 }
