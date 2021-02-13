@@ -71,7 +71,7 @@ class UdacityClient {
     
     //MARK: GET Request
     
-    class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, range: Int, response: ResponseType.Type, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error  in
             guard let data = data else {
                 DispatchQueue.main.async {
@@ -79,15 +79,19 @@ class UdacityClient {
                 }
                 return
             }
-            let range = 5..<data.count
-            let newData = data.subdata(in: range)
-            guard let decodedResponse = try? JSONDecoder().decode(ResponseType.self, from: newData) else {
+            let decoder = JSONDecoder()
+            do {
+                let range = range..<data.count
+                let newData = data.subdata(in: range)
+                let decodedResponse = try decoder.decode(ResponseType.self, from: newData)
+                DispatchQueue.main.async {
+                    completion(.success(decodedResponse))
+                }
+            } catch {
                 DispatchQueue.main.async {
                     completion(.failure(.decodingError))
-                    }
-                return
+                }
             }
-            completion(.success(decodedResponse))
         }
         task.resume()
     }
@@ -112,8 +116,8 @@ class UdacityClient {
         }
     }
     
-    class func getStudentLocations(completion: @escaping (Result<[Student], Error>) -> Void) {
-        taskForGETRequest(url: Endpoints.getStudentLocations.url, response: LocationResults.self) { result in
+    class func getStudentLocations(completion: @escaping (Result<[StudentLocation], Error>) -> Void) {
+        taskForGETRequest(url: Endpoints.getStudentLocations.url, range: 0, response: LocationResults.self) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))

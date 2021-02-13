@@ -16,7 +16,7 @@ class TableVC: UITableViewController {
         super.viewDidLoad()
         UdacityClient.getStudentLocations() { result in
             if case .success(let students) = result {
-                StudentModel.studentList = students
+                StudentModel.student = students
                 print(students)
                 self.tableView.reloadData()
             }
@@ -28,23 +28,23 @@ class TableVC: UITableViewController {
         
         tableView.reloadData()
     }
-}
-
-func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-}
-
-func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return StudentModel.studentList.count
-}
-
-func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "StudentViewCell")!
     
-    let student = StudentModel.studentList[indexPath.row]
-    cell.textLabel?.text = "\(student.firstName)" + " \(student.lastName)"
-    cell.detailTextLabel?.text = student.mediaURL
-    cell.imageView?.image = UIImage(named: "icon_pin")
-    return cell
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return StudentModel.student.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentViewCell")!
+        
+        let student = StudentModel.student[indexPath.row]
+        cell.textLabel?.text = "\(student.firstName)" + " \(student.lastName)"
+        cell.detailTextLabel?.text = student.mediaURL
+        cell.imageView?.image = UIImage(named: "icon_pin")
+        return cell
+    }
 }
-
