@@ -135,7 +135,7 @@
         <!--On the Map-->
         <scene sceneID="SbH-Mc-Da8">
             <objects>
-                <viewController id="P6X-fc-Yis" sceneMemberID="viewController">
+                <viewController id="P6X-fc-Yis" customClass="MapVC" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Fi-RY-wzX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -160,6 +160,10 @@
                             <barButtonItem title="Item" image="icon_refresh" id="Idn-dE-hMK"/>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="Loc-s9-FIN" id="NWA-rd-xLc"/>
+                        <outlet property="view" destination="Loc-s9-FIN" id="Qc0-QW-r0Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yyk-Ao-oGw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
