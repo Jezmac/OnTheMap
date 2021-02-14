@@ -72,6 +72,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhx-Bp-hI1">
                                         <rect key="frame" x="187.5" y="0.0" width="53.5" height="30"/>
                                         <state key="normal" title="Sign Up"/>
+                                        <connections>
+                                            <action selector="signUpTappedWith_sender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x0c-05-9zO"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

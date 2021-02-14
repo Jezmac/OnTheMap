@@ -35,6 +35,12 @@ class LoginVC: UIViewController {
 
     //MARK: - Actions
     
+    
+    @IBAction func signUpTapped(_sender: Any) {
+        if let url = URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com") {
+            UIApplication.shared.open(url)
+        }
+    }
     @IBAction func loginTapped(_ sender: Any) {
         setLogginIn(true)
         UdacityClient.login(username: emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: handleLoginResponse(result:))
@@ -73,11 +79,5 @@ class LoginVC: UIViewController {
         loginButton.isEnabled = !loggingIn
         loginViaFacebookButton.isEnabled = !loggingIn
     }
-    
-//    func showLoginFailure(message: String) {
-//        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
-//        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        show(alertVC, sender: nil)
-//    }
 }
 
