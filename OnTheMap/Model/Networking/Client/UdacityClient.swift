@@ -21,13 +21,16 @@ class UdacityClient {
         
         case login
         case getStudentLocations
+        case updateStudentLocation(String)
         
         var stringValue: String {
             switch self {
-            case .login: return Endpoints.base + "/session"
-            case .getStudentLocations: return Endpoints.base + "/StudentLocation?limit=100?order=-updatedAt"
+            case .login: return "\(Endpoints.base)/session"
+            case .getStudentLocations: return "\(Endpoints.base)/StudentLocation?limit=100?order=-updatedAt"
+            case .updateStudentLocation(let objectId): return "\(Endpoints.base)/StudentLocation/\(objectId)"
             }
         }
+        
         var url: URL {
             return URL(string: stringValue)!
         }
@@ -43,8 +46,7 @@ class UdacityClient {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONEncoder().encode(body)
-        print("\(body)")
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(.failure(.connectionError))
@@ -65,14 +67,13 @@ class UdacityClient {
                     completion(.failure(.decodingError))
                 }
             }
-        }
-        task.resume()
+        }.resume()
     }
     
     //MARK: GET Request
     
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, range: Int, response: ResponseType.Type, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) { data, response, error  in
+        URLSession.shared.dataTask(with: url) { data, response, error  in
             guard let data = data else {
                 DispatchQueue.main.async {
                 completion(.failure(.connectionError))
@@ -92,13 +93,26 @@ class UdacityClient {
                     completion(.failure(.decodingError))
                 }
             }
-        }
-        task.resume()
+        }.resume()
     }
     
-    //MARK: DELETE Request
+    //MARK: PUT Request
     
-    
+    class func taskForPUTRequest<RequestType: Encodable>(url: URL, body: RequestType, completion: @escaping (Result<Any, NetworkError>) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try! JSONEncoder().encode(body)
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(.failure(.connectionError))
+                }
+                return
+            }
+            print(String(data: data, encoding: .utf8)!)
+        }.resume()
+    }
     //MARK:- Requests by type
     
     //MARK: Login Fucntion
@@ -123,6 +137,16 @@ class UdacityClient {
                 completion(.failure(error))
             case .success(let response):
                 completion(.success(response.results))
+            }
+        }
+    }
+    class func updateStudentLocation(completion: @escaping (Result<Bool, Error>) -> Void) {
+        taskForPUTRequest(url: Endpoints.updateStudentLocation(StudentLocation.objectId).url, body: StudentLocation  { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                completion(.success(true))
             }
         }
     }

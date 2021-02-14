@@ -157,7 +157,11 @@
                         <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="VM4-Up-suQ"/>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="icon_addpin" id="umF-w6-kPa"/>
-                            <barButtonItem title="Item" image="icon_refresh" id="Idn-dE-hMK"/>
+                            <barButtonItem title="Item" image="icon_refresh" id="Idn-dE-hMK">
+                                <connections>
+                                    <action selector="refreshTapped:" destination="P6X-fc-Yis" id="0Bf-hY-IQl"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>

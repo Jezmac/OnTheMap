@@ -9,7 +9,6 @@ import MapKit
 
 struct StudentLocation: Codable {
     
-//    let createdAt: Date
     let firstName: String
     let lastName: String
     let latitude: Double
@@ -18,17 +17,17 @@ struct StudentLocation: Codable {
     let mediaURL: String
     let objectId: String
     let uniqueKey: String
-//    let updatedAt: Date
     
 }
 
 
 extension StudentLocation {
-    
+    // Get full name string
     func fullName() -> String {
         return "\(firstName) \(lastName)"
     }
     
+    // Convert name and coordinates into annotation onjects for MapView
     func getlocationPin() -> MKPointAnnotation {
         let lat = CLLocationDegrees(latitude)
         let long = CLLocationDegrees(longitude)
