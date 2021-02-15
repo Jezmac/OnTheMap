@@ -14,11 +14,11 @@ class TableVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UdacityClient.getStudentLocations() { result in
+        UdacityClient.getStudentLocations() { [weak self] result in
             if case .success(let students) = result {
                 StudentModel.student = students
                 print(students)
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }
     }
