@@ -140,14 +140,14 @@ class UdacityClient {
             }
         }
     }
-    class func updateStudentLocation(completion: @escaping (Result<Bool, Error>) -> Void) {
-        taskForPUTRequest(url: Endpoints.updateStudentLocation(StudentLocation.objectId).url, body: StudentLocation  { result in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let response):
-                completion(.success(true))
-            }
-        }
-    }
+//    class func updateStudentLocation(id: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+//        taskForPUTRequest(url: Endpoints.updateStudentLocation(id).url, body: StudentLocation.self)  { result in
+//            switch result {
+//            case .failure(let error):
+//                completion(.failure(error))
+//            case .success(let response):
+//                completion(.success(true))
+//            }
+//        }
+//    }
 }
