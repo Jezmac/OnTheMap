@@ -40,6 +40,15 @@ class MapVC: UIViewController, MKMapViewDelegate {
         }
         return pinView
     }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let subtitle = (view.annotation?.subtitle ?? "") as String?
+            if let url = URL(string: subtitle!) {
+            UIApplication.shared.open(url)
+            }
+        }
+    }
 }
 
 
