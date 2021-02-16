@@ -35,6 +35,7 @@ class MapVC: UIViewController, MKMapViewDelegate {
             pinView!.canShowCallout = true
             pinView!.pinTintColor = .red
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            pinView!.rightCalloutAccessoryView?.isHidden = true
         } else {
             pinView!.annotation = annotation
         }
