@@ -10,7 +10,7 @@ import MapKit
 
 class MapVC: UIViewController, MKMapViewDelegate {
     
-    @IBOutlet private var mapView: MKMapView!
+    @IBOutlet private weak var mapView: MKMapView!
 
     // LifeCycle
     

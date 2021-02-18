@@ -7,18 +7,22 @@
 
 import Foundation
 import UIKit
+import MapKit
 
-class InfoPosting: UIViewController {
+class InfoPostingVC: UIViewController, MKMapViewDelegate {
     
-    weak var locationTextField: UITextField!
-    weak var linkTextField: UITextField!
-    weak var findLocationButton: UIButton!
-    weak var finishButton: UIButton!
-    weak var activityView: UIActivityIndicatorView!
+
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var linkTextField: UITextField!
+    @IBOutlet weak var findLocationButton: LoginButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     
+    //MARK:- Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
 }
+

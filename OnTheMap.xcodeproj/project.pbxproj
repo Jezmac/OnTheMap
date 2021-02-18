@@ -22,6 +22,7 @@
 		0870A5F125D4806200ADC81C /* klavika-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5F025D4806200ADC81C /* klavika-bold.otf */; };
 		087574EF25D876D1001E3831 /* StudentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087574EE25D876D1001E3831 /* StudentViewCell.swift */; };
 		087574F225D87820001E3831 /* StudentLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087574F125D87820001E3831 /* StudentLocationViewModel.swift */; };
+		0879518725DEA3D600C9081C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518625DEA3D600C9081C /* UIViewController+Extension.swift */; };
 		08F4305E25D5C599009B5D8A /* TableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4305D25D5C599009B5D8A /* TableVC.swift */; };
 		08F4306125D5C5AC009B5D8A /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4306025D5C5AC009B5D8A /* MapVC.swift */; };
 		08F4306425D5C5D3009B5D8A /* InfoPostingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */; };
@@ -49,6 +50,7 @@
 		0870A5F025D4806200ADC81C /* klavika-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "klavika-bold.otf"; sourceTree = "<group>"; };
 		087574EE25D876D1001E3831 /* StudentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewCell.swift; sourceTree = "<group>"; };
 		087574F125D87820001E3831 /* StudentLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationViewModel.swift; sourceTree = "<group>"; };
+		0879518625DEA3D600C9081C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		08F4305D25D5C599009B5D8A /* TableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableVC.swift; sourceTree = "<group>"; };
 		08F4306025D5C5AC009B5D8A /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPostingVC.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				08F4305D25D5C599009B5D8A /* TableVC.swift */,
 				08F4306025D5C5AC009B5D8A /* MapVC.swift */,
 				08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */,
+				0879518625DEA3D600C9081C /* UIViewController+Extension.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -169,9 +172,9 @@
 		0870A5E425D41EAB00ADC81C /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				08F4307325D5E61B009B5D8A /* Response */,
 				08F4306E25D5E216009B5D8A /* ErrorTypes */,
 				08F4306925D5D129009B5D8A /* Client */,
+				08F4307325D5E61B009B5D8A /* Response */,
 				08F4306A25D5D137009B5D8A /* Request */,
 			);
 			path = Networking;
@@ -306,6 +309,7 @@
 				08F4306C25D5D180009B5D8A /* LoginRequest.swift in Sources */,
 				086E2A8025D6D0CB00F36A7A /* Alert.swift in Sources */,
 				08F4305E25D5C599009B5D8A /* TableVC.swift in Sources */,
+				0879518725DEA3D600C9081C /* UIViewController+Extension.swift in Sources */,
 				08F4306125D5C5AC009B5D8A /* MapVC.swift in Sources */,
 				0870A5C925D41D6B00ADC81C /* AppDelegate.swift in Sources */,
 				087574EF25D876D1001E3831 /* StudentViewCell.swift in Sources */,
