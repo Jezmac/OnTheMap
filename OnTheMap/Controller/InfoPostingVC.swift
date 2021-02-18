@@ -24,5 +24,9 @@ class InfoPostingVC: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
 
     }
+    
+    @IBAction func findLocationButtonTapped() {
+        performSegue(withIdentifier: "findLocation", sender: nil)
+    }
 }
 

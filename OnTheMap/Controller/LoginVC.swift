@@ -52,8 +52,8 @@ class LoginVC: UIViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainTBC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
             mainTBC.modalPresentationStyle = .fullScreen
-            
             present(mainTBC, animated: true, completion: nil)
+            setLogginIn(false)
             clearTextFields()
         case .failure(let error):
             print(error.localizedDescription)
