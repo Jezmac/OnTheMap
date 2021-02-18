@@ -140,6 +140,8 @@ class UdacityClient {
             }
         }
     }
+    
+    
 //    class func updateStudentLocation(id: String, completion: @escaping (Result<Bool, Error>) -> Void) {
 //        taskForPUTRequest(url: Endpoints.updateStudentLocation(id).url, body: StudentLocation.self)  { result in
 //            switch result {

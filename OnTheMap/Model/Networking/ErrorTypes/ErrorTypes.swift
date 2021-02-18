@@ -17,6 +17,7 @@ public enum NetworkError: Error {
     case networkError(String)
     case domainError
     case decodingError
+    case geocodeError
 }
 
 let statusCode = 0
@@ -28,6 +29,7 @@ extension NetworkError: LocalizedError {
         case .domainError: return NSLocalizedString("There was a problem with the domain", comment: "It happens")
         case .networkError(let message): return NSLocalizedString("\(message)", comment: "from API")
         case .decodingError: return NSLocalizedString("There was a problem with decoding the data", comment: "Bad data")
+        case .geocodeError: return NSLocalizedString("No matching location found", comment: "Please check for mistakes")
         }
     }
 }
