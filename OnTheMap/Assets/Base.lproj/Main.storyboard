@@ -380,7 +380,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="agG-Y6-vgx">
-                                <rect key="frame" x="197" y="334" width="20" height="228"/>
+                                <rect key="frame" x="197" y="523" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ibr-Tk-OZE"/>
@@ -388,10 +388,9 @@
                         <constraints>
                             <constraint firstItem="poi-qB-7V4" firstAttribute="leading" secondItem="ibr-Tk-OZE" secondAttribute="leading" constant="100" id="Icq-Xk-OAf"/>
                             <constraint firstItem="xCJ-gz-jYq" firstAttribute="top" secondItem="poi-qB-7V4" secondAttribute="bottom" constant="50" id="QiL-cH-p8o"/>
-                            <constraint firstItem="poi-qB-7V4" firstAttribute="centerX" secondItem="xCJ-gz-jYq" secondAttribute="centerX" id="V9a-bU-9jG"/>
-                            <constraint firstItem="agG-Y6-vgx" firstAttribute="centerX" secondItem="xCJ-gz-jYq" secondAttribute="centerX" id="Vz7-sR-wjB"/>
-                            <constraint firstItem="agG-Y6-vgx" firstAttribute="centerY" secondItem="Bbd-Yi-3Hq" secondAttribute="centerY" id="b3r-A6-Qkq"/>
-                            <constraint firstItem="agG-Y6-vgx" firstAttribute="bottom" secondItem="ibr-Tk-OZE" secondAttribute="bottom" constant="-300" id="ddF-Ng-cYY"/>
+                            <constraint firstItem="xCJ-gz-jYq" firstAttribute="centerX" secondItem="ibr-Tk-OZE" secondAttribute="centerX" id="V9a-bU-9jG"/>
+                            <constraint firstItem="agG-Y6-vgx" firstAttribute="top" secondItem="xCJ-gz-jYq" secondAttribute="bottom" constant="60" id="bXh-QD-pnn"/>
+                            <constraint firstItem="agG-Y6-vgx" firstAttribute="centerX" secondItem="Bbd-Yi-3Hq" secondAttribute="centerX" id="duy-8E-10G"/>
                             <constraint firstItem="xCJ-gz-jYq" firstAttribute="leading" secondItem="ibr-Tk-OZE" secondAttribute="leading" constant="60" id="g0n-p9-umA"/>
                             <constraint firstItem="poi-qB-7V4" firstAttribute="centerX" secondItem="ibr-Tk-OZE" secondAttribute="centerX" id="qVk-60-MGc"/>
                             <constraint firstItem="poi-qB-7V4" firstAttribute="top" secondItem="ibr-Tk-OZE" secondAttribute="top" constant="50" id="vO4-O4-jnn"/>
