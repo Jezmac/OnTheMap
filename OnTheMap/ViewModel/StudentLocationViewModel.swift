@@ -1,43 +1,43 @@
+////
+////  StudentLocationViewModel.swift
+////  OnTheMap
+////
+////  Created by Jeremy MacLeod on 13/02/2021.
+////
 //
-//  StudentLocationViewModel.swift
-//  OnTheMap
+//import UIKit
 //
-//  Created by Jeremy MacLeod on 13/02/2021.
+//protocol StudentLocationViewModelDelegate: class {
+//    func onFetchFailed(with reason: String)
+//}
 //
-
-import UIKit
-
-protocol StudentLocationViewModelDelegate: class {
-    func onFetchFailed(with reason: String)
-}
-
-class StudentLocationViewModel {
-    private weak var delegate: StudentLocationViewModelDelegate?
-    
-    private var students: [StudentLocation] = []
-    private var selectedIndex = 0
-    private var total = 0
-    
-    init(delegate: StudentLocationViewModelDelegate) {
-        self.delegate = delegate
-    }
-    
-    var totalCount: Int {
-        return total
-    }
-    
-    func student(at index: Int) -> StudentLocation {
-        return students[index]
-    }
-    
-    func getStudentLocations() {
-        UdacityClient.getStudentLocations { [weak self] result in
-            switch result {
-            case .failure(let error):
-                self?.delegate?.onFetchFailed(with: error.localizedDescription)
-            case .success(let response):
-                self?.students = response
-            }
-        }
-    }
-}
+//class StudentLocationViewModel {
+//    private weak var delegate: StudentLocationViewModelDelegate?
+//
+//    private var students: [StudentLocation] = []
+//    private var selectedIndex = 0
+//    private var total = 0
+//
+//    init(delegate: StudentLocationViewModelDelegate) {
+//        self.delegate = delegate
+//    }
+//
+//    var totalCount: Int {
+//        return total
+//    }
+//
+//    func student(at index: Int) -> StudentLocation {
+//        return students[index]
+//    }
+//
+//    func getStudentLocations() {
+//        NetworkClient.getStudentLocations { [weak self] result in
+//            switch result {
+//            case .failure(let error):
+//                self?.delegate?.onFetchFailed(with: error.localizedDescription)
+//            case .success(let response):
+//                self?.students = response
+//            }
+//        }
+//    }
+//}

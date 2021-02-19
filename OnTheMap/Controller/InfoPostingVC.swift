@@ -34,15 +34,9 @@ class InfoPostingVC: UIViewController {
     
     @IBAction func findLocationButtonTapped() {
         guard let address = locationTextField.text else { return }
-        getLocationCoordinates(address: address) { result in
-            switch result {
-            case .failure(let error):
-                print(error.localizedDescription)
-            case .success(let location):
-                self.performSegue(withIdentifier: "findLocation", sender: location)
-            }
-        }
         setGeocoding(true)
+        getLocationCoordinates(address: address, completion: self.handleGeocodeResponse(result:))
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,6 +44,7 @@ class InfoPostingVC: UIViewController {
             let LocationVC = segue.destination as! LocationVC
             let location = sender as! CLPlacemark
             LocationVC.placemark = location
+            LocationVC.link = linkTextField.text ?? ""
         }
     }
 }
@@ -75,15 +70,32 @@ extension InfoPostingVC {
         }
     }
     
-//    func handleLocationResponse(result: Result<CLPlacemark, Error>) -> StudentLocation {
-//        switch result {
-//        case .failure(let error):
-//            print(error)
-//        case .success(let response):
-//            let userLocation = StudentLocation(
-//                firstName: response.debugDescription, lastName: <#T##String#>, latitude: reponse., longitude: <#T##Double#>, mapString: <#T##String#>, mediaURL: <#T##String#>, objectId: <#T##String#>, uniqueKey: <#T##String#>)
-//    }
-    
+    func handleGeocodeResponse(result: Result<CLPlacemark, NetworkError>) {
+        switch result {
+        case .failure(_):
+        Alert.showCouldNotCompileUserLocation(on: self)
+        case .success(let placemark):
+            
+            //MARK: needs refactor
+            
+            if let coordinate = placemark.location?.coordinate {
+            let latitude = coordinate.latitude
+            let longitude = coordinate.longitude
+                let link = linkTextField.text ?? ""
+                let mapString = placemark.locality ?? ""
+                NetworkClient.postUserLocation(latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: link) { result in
+                    switch result {
+                    case .failure(_):
+                        Alert.showCouldNotPostUserLocation(on: self)
+                    case .success(_):
+                    self.performSegue(withIdentifier: "findLocation", sender: placemark)
+                    }
+                }
+            }
+        }
+    }
+        
+  
     func setGeocoding(_ geocoding: Bool) {
         if geocoding {
             activityIndicator.startAnimating()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UdacityClient {
+class NetworkClient {
     
     private struct Auth {
         static var accountID = ""
@@ -15,6 +15,7 @@ class UdacityClient {
         static var key = ""
         static var firstName = ""
         static var lastName = ""
+        static var objectID = ""
     }
     
     enum Endpoints {
@@ -22,16 +23,20 @@ class UdacityClient {
         static let base = "https://onthemap-api.udacity.com/v1"
         
         case login
-        case getStudentLocations
-        case updateStudentLocation(String)
         case getUserData(String)
+        case getStudentLocations
+        case postStudentLocation
+        case putStudentLocation(String)
+
         
         var stringValue: String {
             switch self {
             case .login: return "\(Endpoints.base)/session"
-            case .getStudentLocations: return "\(Endpoints.base)/StudentLocation?limit=100?order=-updatedAt"
-            case .updateStudentLocation(let objectId): return "\(Endpoints.base)/StudentLocation/\(objectId)"
             case .getUserData(let key): return "\(Endpoints.base)/users/\(key)"
+            case .getStudentLocations: return "\(Endpoints.base)/StudentLocation?limit=100&order=-updatedAt"
+            case .postStudentLocation: return "\(Endpoints.base)/StudentLocation"
+            case .putStudentLocation(let objectId): return "\(Endpoints.base)/StudentLocation/\(objectId)"
+
             }
         }
         
@@ -44,7 +49,7 @@ class UdacityClient {
     
     //MARK: POST Request
     
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, response: ResponseType.Type, body: RequestType, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
+    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, range: Int, response: ResponseType.Type, body: RequestType, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -59,7 +64,7 @@ class UdacityClient {
             }
             let decoder = JSONDecoder()
             do {
-                let range = 5..<data.count
+                let range = range..<data.count
                 let newData = data.subdata(in: range)
                 let decodedResponse = try decoder.decode(ResponseType.self, from: newData)
                 DispatchQueue.main.async {
@@ -102,44 +107,35 @@ class UdacityClient {
     
     //MARK: PUT Request
     
-    class func taskForPUTRequest<RequestType: Encodable>(url: URL, body: RequestType, completion: @escaping (Result<Any, NetworkError>) -> Void) {
+    class func taskForPUTRequest<RequestType: Encodable>(url: URL, body: RequestType, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONEncoder().encode(body)
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
+            guard data != nil else {
                 DispatchQueue.main.async {
                     completion(.failure(.connectionError))
                 }
                 return
             }
-            print(String(data: data, encoding: .utf8)!)
+            DispatchQueue.main.async {
+                completion(.success(true))
+            }
         }.resume()
     }
     //MARK:- Requests by type
     
-    //MARK: Login Fucntion
+    //MARK: Login Function
     
     class func login(username: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        taskForPOSTRequest(url: Endpoints.login.url, response: SessionResponse.self, body: LoginRequest(udacity: LoginDetails(username: username, password: password))) { result in
+        taskForPOSTRequest(url: Endpoints.login.url, range: 5, response: SessionResponse.self, body: LoginRequest(udacity: LoginDetails(username: username, password: password))) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let response):
                 Auth.key = response.account.key
                 completion(.success(true))
-            }
-        }
-    }
-    
-    class func getStudentLocations(completion: @escaping (Result<[StudentLocation], Error>) -> Void) {
-        taskForGETRequest(url: Endpoints.getStudentLocations.url, range: 0, response: LocationResults.self) { result in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let response):
-                completion(.success(response.results))
             }
         }
     }
@@ -154,6 +150,41 @@ class UdacityClient {
                 Auth.firstName = response.firstName
                 Auth.lastName = response.lastName
                 print(response)
+            }
+        }
+    }
+    
+    class func getStudentLocations(completion: @escaping (Result<[StudentLocation], Error>) -> Void) {
+        taskForGETRequest(url: Endpoints.getStudentLocations.url, range: 0, response: LocationResults.self) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                completion(.success(response.results))
+            }
+        }
+    }
+
+    class func postUserLocation(latitude: Double, longitude: Double, mapString: String, mediaURL: String, completion: @escaping (Result<POSTResponse, Error>) -> Void) {
+        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, range: 0, response: POSTResponse.self, body: UserLocation(firstName: Auth.firstName, lastName: Auth.lastName, latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: mediaURL, uniqueKey: Auth.key)) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                completion(.success(response))
+                Auth.objectID = response.objectId
+                print(response.objectId)
+            }
+        }
+    }
+    
+    class func putUserLocation(latitude: Double, longitude: Double, mapString: String, mediaURL: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        taskForPUTRequest(url: Endpoints.putStudentLocation(Auth.objectID).url, body: UserLocation(firstName: Auth.firstName, lastName: Auth.lastName, latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: mediaURL, uniqueKey: Auth.key)) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(_):
+                completion(.success(true))
             }
         }
     }

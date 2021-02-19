@@ -57,7 +57,7 @@ extension MapVC {
     
     // Call client to request latest 100 student locations
     private func updateMap() {
-        UdacityClient.getStudentLocations { [weak self] result in
+        NetworkClient.getStudentLocations { [weak self] result in
             if case .success(let students) = result {
                 StudentModel.student = students
                 self?.addPins()

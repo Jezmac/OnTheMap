@@ -15,17 +15,39 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var finishButton: UIButton!
     
     var placemark: CLPlacemark!
-
+    var link = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         zoomedMapView.delegate = self
         mapManager(mapView: zoomedMapView, placemark: placemark)
+        print(link)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
+        
     }
+    
+    @IBAction func finishButtonTapped(_ sender: Any) {
+        if let coordinate = placemark.location?.coordinate {
+            let latitude = coordinate.latitude
+            let longitude = coordinate.longitude
+            let mapString = placemark.locality ?? ""
+            NetworkClient.putUserLocation(latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: link) { result in
+                switch result {
+                case .failure(_):
+                    Alert.showCouldNotPostUserLocation(on: self)
+                case .success(_):
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     
     func mapManager(mapView: MKMapView, placemark: CLPlacemark) {
         let location = placemark.location
@@ -44,5 +66,5 @@ class LocationVC: UIViewController, MKMapViewDelegate {
         mapView.setRegion(region, animated: true)
         mapView.selectAnnotation(annotation, animated: true)
     }
-
+    
 }

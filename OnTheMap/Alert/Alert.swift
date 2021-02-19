@@ -27,4 +27,12 @@ struct Alert {
     static func showNoUserDataAlert(on vc: UIViewController) {
         showBasicAlert(on: vc, with: "Could not find data for this user ID on the server", message: "Please check your Udacity account")
     }
+    
+    static func showCouldNotCompileUserLocation( on vc: UIViewController) {
+        showBasicAlert(on: vc, with: "Could not compile user data for this location", message:  "Please check all fields have been completed")
+    }
+    
+    static func showCouldNotPostUserLocation( on vc: UIViewController) {
+        showBasicAlert(on: vc, with: "Could not post data to server", message:  "Please check all fields have been completed")
+    }
 }

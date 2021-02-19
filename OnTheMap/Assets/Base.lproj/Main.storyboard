@@ -339,7 +339,7 @@
                                             <constraint firstAttribute="height" constant="45" id="cPh-AW-2v8"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next" textContentType="location"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="location"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Link" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="DfH-Ef-8MW">
                                         <rect key="frame" x="0.0" y="65" width="294" height="45"/>
@@ -347,7 +347,7 @@
                                             <constraint firstAttribute="height" constant="45" id="gU8-KA-U1f"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="go" secureTextEntry="YES" textContentType="url"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES" textContentType="url"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoY-gG-31L" userLabel="findLocationButton" customClass="LoginButton" customModule="OnTheMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="130" width="294" height="45"/>
@@ -439,6 +439,9 @@
                                 <state key="normal" title="FINISH">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="finishButtonTapped:" destination="ZOy-fC-1Fr" eventType="touchUpInside" id="RGy-7D-zDd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="K1V-Up-0ee"/>

@@ -43,13 +43,13 @@ class LoginVC: UIViewController {
     }
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
-        UdacityClient.login(username: emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: handleLoginResponse(result:))
+        NetworkClient.login(username: emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: handleLoginResponse(result:))
         
     }
     func handleLoginResponse(result: Result<Bool, Error>) {
         switch result {
         case .success(_):
-            UdacityClient.getUserData(completion: self.handleGetUserDataResponse(result:))
+            NetworkClient.getUserData(completion: self.handleGetUserDataResponse(result:))
         case .failure(_):
             Alert.showInvalidIDAlert(on: self)
             setLoggingIn(false)
