@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import MapKit
-import CoreLocation
 
 class InfoPostingVC: UIViewController, MKMapViewDelegate {
     
@@ -17,9 +16,10 @@ class InfoPostingVC: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var linkTextField: UITextField!
-    @IBOutlet weak var findLocationButton: LoginButton!
+    @IBOutlet weak var findLocationButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
+    
     
     //MARK:- Life Cycle
     
@@ -35,31 +35,37 @@ class InfoPostingVC: UIViewController, MKMapViewDelegate {
         getLocationCoordinates(address: address) { result in
             switch result {
             case .failure(let error):
-            print(error.localizedDescription)
+                print(error.localizedDescription)
             case .success(let location):
-                print(location)
-                self.performSegue(withIdentifier: "findLocation", sender: nil)
+                self.performSegue(withIdentifier: "findLocation", sender: location)
             }
         }
         setGeocoding(true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "findLocation") {
+            let LocationVC = segue.destination as! LocationVC
+            let location = sender as! CLPlacemark
+            LocationVC.placemark = location
+        }
+    }
 }
 
 extension InfoPostingVC {
 
-    func getLocationCoordinates(address: String, completion: @escaping (Result<CLLocationCoordinate2D, NetworkError>) -> Void) {
+    func getLocationCoordinates(address: String, completion: @escaping (Result<CLPlacemark, NetworkError>) -> Void) {
         CLGeocoder().geocodeAddressString(address) { placemarks, error in
             self.setGeocoding(false)
             if error != nil {
                 completion(.failure(.geocodeError))
             } else {
-                var location: CLLocation?
+                var location: CLPlacemark?
                 if let placemarks = placemarks, placemarks.count > 0 {
-                    location = placemarks.first?.location
+                    location = placemarks.first
                 }
                 if let location = location {
-                completion(.success(location.coordinate))
+                completion(.success(location))
                 } else {
                     completion(.failure(.geocodeError))
                 }
@@ -67,17 +73,27 @@ extension InfoPostingVC {
         }
     }
     
+    func mapManager(mapView: MKMapView, placemark: CLPlacemark) {
+        let location = placemark.location
+        guard let coordinate = location?.coordinate else { return }
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = placemark.locality
+        mapView.addAnnotation(annotation)
+        mapView.setCenter(coordinate, animated: true)
+        let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        mapView.setRegion(region, animated: true)
+    }
+    
     func setGeocoding(_ geocoding: Bool) {
         if geocoding {
             activityIndicator.startAnimating()
         } else {
             activityIndicator.stopAnimating()
-            
         }
         findLocationButton.isEnabled = !geocoding
         linkTextField.isEnabled = !geocoding
         locationTextField.isEnabled = !geocoding
     }
-    
 }
 

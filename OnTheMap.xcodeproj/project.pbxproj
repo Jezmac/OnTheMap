@@ -23,6 +23,7 @@
 		087574EF25D876D1001E3831 /* StudentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087574EE25D876D1001E3831 /* StudentViewCell.swift */; };
 		087574F225D87820001E3831 /* StudentLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087574F125D87820001E3831 /* StudentLocationViewModel.swift */; };
 		0879518725DEA3D600C9081C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518625DEA3D600C9081C /* UIViewController+Extension.swift */; };
+		0879518C25DF290000C9081C /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518B25DF28FF00C9081C /* LocationVC.swift */; };
 		08F4305E25D5C599009B5D8A /* TableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4305D25D5C599009B5D8A /* TableVC.swift */; };
 		08F4306125D5C5AC009B5D8A /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4306025D5C5AC009B5D8A /* MapVC.swift */; };
 		08F4306425D5C5D3009B5D8A /* InfoPostingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */; };
@@ -51,6 +52,7 @@
 		087574EE25D876D1001E3831 /* StudentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewCell.swift; sourceTree = "<group>"; };
 		087574F125D87820001E3831 /* StudentLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationViewModel.swift; sourceTree = "<group>"; };
 		0879518625DEA3D600C9081C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		0879518B25DF28FF00C9081C /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		08F4305D25D5C599009B5D8A /* TableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableVC.swift; sourceTree = "<group>"; };
 		08F4306025D5C5AC009B5D8A /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPostingVC.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				08F4305D25D5C599009B5D8A /* TableVC.swift */,
 				08F4306025D5C5AC009B5D8A /* MapVC.swift */,
 				08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */,
+				0879518B25DF28FF00C9081C /* LocationVC.swift */,
 				0879518625DEA3D600C9081C /* UIViewController+Extension.swift */,
 			);
 			path = Controller;
@@ -302,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0870A5EB25D479D700ADC81C /* ColorPalette.swift in Sources */,
+				0879518C25DF290000C9081C /* LocationVC.swift in Sources */,
 				08F4307025D5E22C009B5D8A /* ErrorTypes.swift in Sources */,
 				086E2A8325D72E1800F36A7A /* StudentLocation.swift in Sources */,
 				0870A5CD25D41D6B00ADC81C /* LoginVC.swift in Sources */,

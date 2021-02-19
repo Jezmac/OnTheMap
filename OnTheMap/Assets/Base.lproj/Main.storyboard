@@ -416,10 +416,10 @@
             </objects>
             <point key="canvasLocation" x="4130" y="80"/>
         </scene>
-        <!--View Controller-->
+        <!--LocationVC-->
         <scene sceneID="Zix-uF-5hB">
             <objects>
-                <viewController storyboardIdentifier="finishVC" id="ZOy-fC-1Fr" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="finishVC" id="ZOy-fC-1Fr" customClass="LocationVC" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oiy-uC-Po7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -454,6 +454,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nIZ-3K-UVq"/>
+                    <connections>
+                        <outlet property="finishButton" destination="jo2-Vu-7Mx" id="hhC-3v-e3K"/>
+                        <outlet property="zoomedMapView" destination="HFb-ZY-9Zv" id="9TW-jw-KZy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7oY-Mf-fiw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
