@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class InfoPostingVC: UIViewController, MKMapViewDelegate {
+class InfoPostingVC: UIViewController {
     
 
     //MARK:- Outlets
@@ -20,6 +20,8 @@ class InfoPostingVC: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     
+    
+
     
     //MARK:- Life Cycle
     
@@ -73,17 +75,14 @@ extension InfoPostingVC {
         }
     }
     
-    func mapManager(mapView: MKMapView, placemark: CLPlacemark) {
-        let location = placemark.location
-        guard let coordinate = location?.coordinate else { return }
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = placemark.locality
-        mapView.addAnnotation(annotation)
-        mapView.setCenter(coordinate, animated: true)
-        let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-        mapView.setRegion(region, animated: true)
-    }
+//    func handleLocationResponse(result: Result<CLPlacemark, Error>) -> StudentLocation {
+//        switch result {
+//        case .failure(let error):
+//            print(error)
+//        case .success(let response):
+//            let userLocation = StudentLocation(
+//                firstName: response.debugDescription, lastName: <#T##String#>, latitude: reponse., longitude: <#T##Double#>, mapString: <#T##String#>, mediaURL: <#T##String#>, objectId: <#T##String#>, uniqueKey: <#T##String#>)
+//    }
     
     func setGeocoding(_ geocoding: Bool) {
         if geocoding {

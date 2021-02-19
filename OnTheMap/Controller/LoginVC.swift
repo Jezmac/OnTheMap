@@ -42,23 +42,32 @@ class LoginVC: UIViewController {
         }
     }
     @IBAction func loginTapped(_ sender: Any) {
-        setLogginIn(true)
+        setLoggingIn(true)
         UdacityClient.login(username: emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: handleLoginResponse(result:))
         
     }
     func handleLoginResponse(result: Result<Bool, Error>) {
         switch result {
         case .success(_):
+            UdacityClient.getUserData(completion: self.handleGetUserDataResponse(result:))
+        case .failure(_):
+            Alert.showInvalidIDAlert(on: self)
+            setLoggingIn(false)
+        }
+    }
+    
+    func handleGetUserDataResponse(result: Result<User, Error>) {
+        switch result {
+        case .failure(_):
+        Alert.showNoUserDataAlert(on: self)
+            setLoggingIn(false)
+        case .success(_):
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainTBC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
             mainTBC.modalPresentationStyle = .fullScreen
             present(mainTBC, animated: true, completion: nil)
-            setLogginIn(false)
+            setLoggingIn(false)
             clearTextFields()
-        case .failure(let error):
-            print(error.localizedDescription)
-            Alert.showInvalidIDAlert(on: self)
-            setLogginIn(false)
         }
     }
     
@@ -68,7 +77,7 @@ class LoginVC: UIViewController {
         passwordTextField.text = ""
     }
     
-    func setLogginIn(_ loggingIn: Bool) {
+    func setLoggingIn(_ loggingIn: Bool) {
         if loggingIn {
             activityIndicator.startAnimating()
         } else {

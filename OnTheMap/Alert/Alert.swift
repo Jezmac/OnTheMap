@@ -23,4 +23,8 @@ struct Alert {
     static func showInvalidIDAlert(on vc: UIViewController)  {
         showBasicAlert(on: vc, with: "Invalid Email address and/or password", message: "Please check your details and try again")
     }
+    
+    static func showNoUserDataAlert(on vc: UIViewController) {
+        showBasicAlert(on: vc, with: "Could not find data for this user ID on the server", message: "Please check your Udacity account")
+    }
 }

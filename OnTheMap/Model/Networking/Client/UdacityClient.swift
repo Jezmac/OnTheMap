@@ -10,9 +10,11 @@ import Foundation
 class UdacityClient {
     
     private struct Auth {
-        static var accountID = 0
+        static var accountID = ""
         static var sessionID = ""
         static var key = ""
+        static var firstName = ""
+        static var lastName = ""
     }
     
     enum Endpoints {
@@ -22,12 +24,14 @@ class UdacityClient {
         case login
         case getStudentLocations
         case updateStudentLocation(String)
+        case getUserData(String)
         
         var stringValue: String {
             switch self {
             case .login: return "\(Endpoints.base)/session"
             case .getStudentLocations: return "\(Endpoints.base)/StudentLocation?limit=100?order=-updatedAt"
             case .updateStudentLocation(let objectId): return "\(Endpoints.base)/StudentLocation/\(objectId)"
+            case .getUserData(let key): return "\(Endpoints.base)/users/\(key)"
             }
         }
         
@@ -124,7 +128,6 @@ class UdacityClient {
                 completion(.failure(error))
             case .success(let response):
                 Auth.key = response.account.key
-                print(Auth.key)
                 completion(.success(true))
             }
         }
@@ -141,15 +144,17 @@ class UdacityClient {
         }
     }
     
-    
-//    class func updateStudentLocation(id: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-//        taskForPUTRequest(url: Endpoints.updateStudentLocation(id).url, body: StudentLocation.self)  { result in
-//            switch result {
-//            case .failure(let error):
-//                completion(.failure(error))
-//            case .success(let response):
-//                completion(.success(true))
-//            }
-//        }
-//    }
+    class func getUserData(completion: @escaping (Result<User, Error>) -> Void) {
+        taskForGETRequest(url: Endpoints.getUserData(Auth.key).url, range: 5, response: User.self) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                completion(.success(response))
+                Auth.firstName = response.firstName
+                Auth.lastName = response.lastName
+                print(response)
+            }
+        }
+    }
 }

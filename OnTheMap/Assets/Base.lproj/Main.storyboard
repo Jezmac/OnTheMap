@@ -152,10 +152,10 @@
                         <viewLayoutGuide key="safeArea" id="h12-YZ-1d6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Loc-s9-FIN" firstAttribute="leading" secondItem="h12-YZ-1d6" secondAttribute="leading" id="7eX-dl-44o"/>
+                            <constraint firstItem="Loc-s9-FIN" firstAttribute="leading" secondItem="6Fi-RY-wzX" secondAttribute="leading" id="7eX-dl-44o"/>
                             <constraint firstItem="Loc-s9-FIN" firstAttribute="top" secondItem="6Fi-RY-wzX" secondAttribute="top" id="De7-LE-8KY"/>
                             <constraint firstItem="Loc-s9-FIN" firstAttribute="bottom" secondItem="6Fi-RY-wzX" secondAttribute="bottom" id="GhG-LU-Uv4"/>
-                            <constraint firstItem="h12-YZ-1d6" firstAttribute="trailing" secondItem="Loc-s9-FIN" secondAttribute="trailing" id="arm-MB-f0L"/>
+                            <constraint firstItem="Loc-s9-FIN" firstAttribute="trailing" secondItem="6Fi-RY-wzX" secondAttribute="trailing" id="arm-MB-f0L"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On the Map" id="LJH-hT-ndH">
@@ -444,10 +444,10 @@
                         <viewLayoutGuide key="safeArea" id="K1V-Up-0ee"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="HFb-ZY-9Zv" secondAttribute="bottom" id="1Pi-6H-zuF"/>
-                            <constraint firstItem="HFb-ZY-9Zv" firstAttribute="leading" secondItem="K1V-Up-0ee" secondAttribute="leading" id="3Ok-6o-INv"/>
+                            <constraint firstItem="HFb-ZY-9Zv" firstAttribute="bottom" secondItem="oiy-uC-Po7" secondAttribute="bottom" id="1Pi-6H-zuF"/>
+                            <constraint firstItem="HFb-ZY-9Zv" firstAttribute="leading" secondItem="oiy-uC-Po7" secondAttribute="leading" id="3Ok-6o-INv"/>
                             <constraint firstItem="jo2-Vu-7Mx" firstAttribute="bottom" secondItem="K1V-Up-0ee" secondAttribute="bottom" constant="-45" id="C7C-yn-dkF"/>
-                            <constraint firstItem="K1V-Up-0ee" firstAttribute="trailing" secondItem="HFb-ZY-9Zv" secondAttribute="trailing" id="JYb-j2-9Cl"/>
+                            <constraint firstItem="HFb-ZY-9Zv" firstAttribute="trailing" secondItem="oiy-uC-Po7" secondAttribute="trailing" id="JYb-j2-9Cl"/>
                             <constraint firstItem="jo2-Vu-7Mx" firstAttribute="centerX" secondItem="K1V-Up-0ee" secondAttribute="centerX" id="R6R-3u-02F"/>
                             <constraint firstItem="HFb-ZY-9Zv" firstAttribute="top" secondItem="oiy-uC-Po7" secondAttribute="top" id="tu3-AN-9bo"/>
                             <constraint firstItem="K1V-Up-0ee" firstAttribute="trailing" secondItem="jo2-Vu-7Mx" secondAttribute="trailing" constant="60" id="uwQ-xc-w7X"/>

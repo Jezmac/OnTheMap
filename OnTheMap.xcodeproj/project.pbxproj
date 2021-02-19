@@ -24,6 +24,7 @@
 		087574F225D87820001E3831 /* StudentLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087574F125D87820001E3831 /* StudentLocationViewModel.swift */; };
 		0879518725DEA3D600C9081C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518625DEA3D600C9081C /* UIViewController+Extension.swift */; };
 		0879518C25DF290000C9081C /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518B25DF28FF00C9081C /* LocationVC.swift */; };
+		0879519025DFD79F00C9081C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518F25DFD79F00C9081C /* User.swift */; };
 		08F4305E25D5C599009B5D8A /* TableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4305D25D5C599009B5D8A /* TableVC.swift */; };
 		08F4306125D5C5AC009B5D8A /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4306025D5C5AC009B5D8A /* MapVC.swift */; };
 		08F4306425D5C5D3009B5D8A /* InfoPostingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */; };
@@ -53,6 +54,7 @@
 		087574F125D87820001E3831 /* StudentLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationViewModel.swift; sourceTree = "<group>"; };
 		0879518625DEA3D600C9081C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		0879518B25DF28FF00C9081C /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
+		0879518F25DFD79F00C9081C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		08F4305D25D5C599009B5D8A /* TableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableVC.swift; sourceTree = "<group>"; };
 		08F4306025D5C5AC009B5D8A /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPostingVC.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				08F4307425D5E633009B5D8A /* SessionResponse.swift */,
 				086E2A8225D72E1800F36A7A /* StudentLocation.swift */,
 				086E2A8A25D73AAD00F36A7A /* LocationResults.swift */,
+				0879518F25DFD79F00C9081C /* User.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				08F4306725D5CB4E009B5D8A /* UdacityClient.swift in Sources */,
 				086E2A8725D7337B00F36A7A /* StudentModel.swift in Sources */,
 				08F4307525D5E633009B5D8A /* SessionResponse.swift in Sources */,
+				0879519025DFD79F00C9081C /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
