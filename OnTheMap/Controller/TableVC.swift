@@ -17,7 +17,6 @@ class TableVC: UITableViewController {
         NetworkClient.getStudentLocations() { [weak self] result in
             if case .success(let students) = result {
                 StudentModel.student = students
-                print(students)
                 self?.tableView.reloadData()
             }
         }

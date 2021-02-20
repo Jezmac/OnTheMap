@@ -13,9 +13,9 @@ extension UIViewController {
     @IBAction func postInfoButtonTapped(_ sender: UIBarButtonItem) {
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let nvc = mainStoryboard.instantiateViewController(withIdentifier: "InfoPostingNVC")
+        let navigationVC = mainStoryboard.instantiateViewController(withIdentifier: "InfoPostingNVC")
         //nvc.modalPresentationStyle = .fullScreen
-        present(nvc, animated: true, completion: nil)
+        present(navigationVC, animated: true, completion: nil)
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {

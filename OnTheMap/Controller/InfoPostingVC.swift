@@ -73,29 +73,28 @@ extension InfoPostingVC {
     func handleGeocodeResponse(result: Result<CLPlacemark, NetworkError>) {
         switch result {
         case .failure(_):
-        Alert.showCouldNotCompileUserLocation(on: self)
+            Alert.showCouldNotCompileUserLocation(on: self)
         case .success(let placemark):
-            
+            self.performSegue(withIdentifier: "findLocation", sender: placemark)
             //MARK: needs refactor
             
-            if let coordinate = placemark.location?.coordinate {
-            let latitude = coordinate.latitude
-            let longitude = coordinate.longitude
-                let link = linkTextField.text ?? ""
-                let mapString = placemark.locality ?? ""
-                NetworkClient.postUserLocation(latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: link) { result in
-                    switch result {
-                    case .failure(_):
-                        Alert.showCouldNotPostUserLocation(on: self)
-                    case .success(_):
-                    self.performSegue(withIdentifier: "findLocation", sender: placemark)
-                    }
-                }
-            }
+//            if let coordinate = placemark.location?.coordinate {
+//            let latitude = coordinate.latitude
+//            let longitude = coordinate.longitude
+//                let link = linkTextField.text ?? ""
+//                let mapString = placemark.locality ?? ""
+//                NetworkClient.postUserLocation(latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: link) { result in
+//                    switch result {
+//                    case .failure(_):
+//                        Alert.showCouldNotPostUserLocation(on: self)
+//                    case .success(_):
+//                    self.performSegue(withIdentifier: "findLocation", sender: placemark)
+//                    }
+//                }
+//            }
         }
     }
         
-  
     func setGeocoding(_ geocoding: Bool) {
         if geocoding {
             activityIndicator.startAnimating()
