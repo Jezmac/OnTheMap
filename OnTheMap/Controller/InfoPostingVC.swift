@@ -19,10 +19,7 @@ class InfoPostingVC: UIViewController {
     @IBOutlet weak var findLocationButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
-    
-    
 
-    
     //MARK:- Life Cycle
     
     override func viewDidLoad() {
@@ -47,12 +44,17 @@ class InfoPostingVC: UIViewController {
             LocationVC.link = linkTextField.text ?? ""
         }
     }
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension InfoPostingVC {
 
     func getLocationCoordinates(address: String, completion: @escaping (Result<CLPlacemark, NetworkError>) -> Void) {
+        
         CLGeocoder().geocodeAddressString(address) { placemarks, error in
+            
             self.setGeocoding(false)
             if error != nil {
                 completion(.failure(.geocodeError))
@@ -76,22 +78,6 @@ extension InfoPostingVC {
             Alert.showCouldNotCompileUserLocation(on: self)
         case .success(let placemark):
             self.performSegue(withIdentifier: "findLocation", sender: placemark)
-            //MARK: needs refactor
-            
-//            if let coordinate = placemark.location?.coordinate {
-//            let latitude = coordinate.latitude
-//            let longitude = coordinate.longitude
-//                let link = linkTextField.text ?? ""
-//                let mapString = placemark.locality ?? ""
-//                NetworkClient.postUserLocation(latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: link) { result in
-//                    switch result {
-//                    case .failure(_):
-//                        Alert.showCouldNotPostUserLocation(on: self)
-//                    case .success(_):
-//                    self.performSegue(withIdentifier: "findLocation", sender: placemark)
-//                    }
-//                }
-//            }
         }
     }
         
@@ -105,5 +91,7 @@ extension InfoPostingVC {
         linkTextField.isEnabled = !geocoding
         locationTextField.isEnabled = !geocoding
     }
+    
+    
 }
 

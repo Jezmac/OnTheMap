@@ -31,8 +31,8 @@ class LocationVC: UIViewController, MKMapViewDelegate {
     
     @IBAction func finishButtonTapped(_ sender: Any) {
         if let coordinate = placemark.location?.coordinate {
-        let latitude = coordinate.latitude
-        let longitude = coordinate.longitude
+            let latitude = coordinate.latitude
+            let longitude = coordinate.longitude
             let mapString = placemark.locality ?? ""
             NetworkClient.postUserLocation(latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: link) { result in
                 switch result {

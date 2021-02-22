@@ -46,10 +46,16 @@ class LoginVC: UIViewController {
         NetworkClient.login(username: emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: handleLoginResponse(result:))
         
     }
+    
     func handleLoginResponse(result: Result<Bool, Error>) {
         switch result {
         case .success(_):
             NetworkClient.getUserData(completion: self.handleGetUserDataResponse(result:))
+            NetworkClient.getStudentLocations { result in
+                if case .success(let response) = result {
+                    StudentModel.student = response
+                }
+            }
         case .failure(_):
             Alert.showInvalidIDAlert(on: self)
             setLoggingIn(false)
@@ -70,7 +76,6 @@ class LoginVC: UIViewController {
             clearTextFields()
         }
     }
-    
     
     func clearTextFields() {
         emailTextField.text = ""

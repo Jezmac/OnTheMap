@@ -162,6 +162,7 @@ class NetworkClient {
                 completion(.failure(error))
             case .success(let response):
                 completion(.success(response.results))
+                NotificationCenter.default.post(name: .newLocationsReceived, object: nil)
             }
         }
     }
@@ -186,7 +187,17 @@ class NetworkClient {
                 completion(.failure(error))
             case .success(_):
                 completion(.success(true))
+                getStudentLocations { result in
+                    if case .success(let students) = result {
+                        StudentModel.student = students
+                    }
+                }
             }
         }
     }
+}
+
+
+extension Notification.Name {
+    static let newLocationsReceived = Notification.Name("NewLocationsReceived")
 }

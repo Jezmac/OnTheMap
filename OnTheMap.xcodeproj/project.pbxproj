@@ -21,7 +21,7 @@
 		0870A5EB25D479D700ADC81C /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870A5EA25D479D700ADC81C /* ColorPalette.swift */; };
 		0870A5F125D4806200ADC81C /* klavika-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5F025D4806200ADC81C /* klavika-bold.otf */; };
 		087574EF25D876D1001E3831 /* StudentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087574EE25D876D1001E3831 /* StudentViewCell.swift */; };
-		0879518725DEA3D600C9081C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518625DEA3D600C9081C /* UIViewController+Extension.swift */; };
+		0879518725DEA3D600C9081C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518625DEA3D600C9081C /* BaseViewController.swift */; };
 		0879518C25DF290000C9081C /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518B25DF28FF00C9081C /* LocationVC.swift */; };
 		0879519025DFD79F00C9081C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518F25DFD79F00C9081C /* User.swift */; };
 		0879519325E014B100C9081C /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879519225E014B000C9081C /* UserLocation.swift */; };
@@ -53,7 +53,7 @@
 		0870A5EA25D479D700ADC81C /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		0870A5F025D4806200ADC81C /* klavika-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "klavika-bold.otf"; sourceTree = "<group>"; };
 		087574EE25D876D1001E3831 /* StudentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewCell.swift; sourceTree = "<group>"; };
-		0879518625DEA3D600C9081C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		0879518625DEA3D600C9081C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0879518B25DF28FF00C9081C /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		0879518F25DFD79F00C9081C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0879519225E014B000C9081C /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
@@ -141,11 +141,11 @@
 			isa = PBXGroup;
 			children = (
 				0870A5CC25D41D6B00ADC81C /* LoginVC.swift */,
-				08F4305D25D5C599009B5D8A /* TableVC.swift */,
 				08F4306025D5C5AC009B5D8A /* MapVC.swift */,
+				08F4305D25D5C599009B5D8A /* TableVC.swift */,
 				08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */,
 				0879518B25DF28FF00C9081C /* LocationVC.swift */,
-				0879518625DEA3D600C9081C /* UIViewController+Extension.swift */,
+				0879518625DEA3D600C9081C /* BaseViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 				08E1896E25E160DB0067A6F1 /* UserModel.swift in Sources */,
 				086E2A8025D6D0CB00F36A7A /* Alert.swift in Sources */,
 				08F4305E25D5C599009B5D8A /* TableVC.swift in Sources */,
-				0879518725DEA3D600C9081C /* UIViewController+Extension.swift in Sources */,
+				0879518725DEA3D600C9081C /* BaseViewController.swift in Sources */,
 				08F4306125D5C5AC009B5D8A /* MapVC.swift in Sources */,
 				0870A5C925D41D6B00ADC81C /* AppDelegate.swift in Sources */,
 				087574EF25D876D1001E3831 /* StudentViewCell.swift in Sources */,

@@ -8,28 +8,21 @@
 import Foundation
 import MapKit
 
-class MapVC: UIViewController, MKMapViewDelegate {
+class MapVC: BaseViewController, MKMapViewDelegate {
+    
     
     @IBOutlet private weak var mapView: MKMapView!
 
     // LifeCycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        updateMap()
+        super.viewWillAppear(animated)
+        setupObserver()
     }
     
-    // Actions
-    
-    @IBAction func refreshTapped(_ sender: Any) {
-        updateMap()
+    deinit {
+        clearObserver()
     }
-    
-    // Generate MKPinViewAnnotations for each StudentLocation
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
@@ -59,17 +52,9 @@ class MapVC: UIViewController, MKMapViewDelegate {
 
 extension MapVC {
     
-    // Call client to request latest 100 student locations
-    private func updateMap() {
-        NetworkClient.getStudentLocations { [weak self] result in
-            if case .success(let students) = result {
-                StudentModel.student = students
-                self?.addPins()
-            }
-        }
-    }
+
     // Creates annotation array for MapView
-    private func addPins() {
+    @objc func addPins(_ sender: Notification) {
         var annotations = [MKAnnotation]()
         
         // Iterate over the array to call annotation array for each index
@@ -81,6 +66,15 @@ extension MapVC {
             // Then the updated array is added to the map
             self.mapView.addAnnotations(annotations)
         }
+    }
+    
+    func setupObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(addPins(_:)), name: .newLocationsReceived, object: nil)
+        
+    }
+    
+    func clearObserver() {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
