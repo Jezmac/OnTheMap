@@ -9,6 +9,7 @@ import Foundation
 
 class NetworkClient {
     
+    //MARK:- Struct for storing a variety of authorisation and user data
     private struct Auth {
         static var accountID = ""
         static var sessionID = ""
@@ -18,6 +19,7 @@ class NetworkClient {
         static var objectID = ""
     }
     
+    //MARK:- Enum for creation of endpoints for various Network tasks
     enum Endpoints {
         
         static let base = "https://onthemap-api.udacity.com/v1"
@@ -127,7 +129,7 @@ class NetworkClient {
     }
     //MARK:- Requests by type
     
-    //MARK: Login Function
+    //MARK: Login Function, stores student ID as "key" in Auth struct
     
     class func login(username: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         taskForPOSTRequest(url: Endpoints.login.url, range: 5, response: SessionResponse.self, body: LoginRequest(udacity: LoginDetails(username: username, password: password))) { result in
@@ -140,6 +142,8 @@ class NetworkClient {
             }
         }
     }
+    
+    //MARK: Fetch User Data function, stores first and last name in Auth Struct
     
     class func getUserData(completion: @escaping (Result<User, Error>) -> Void) {
         taskForGETRequest(url: Endpoints.getUserData(Auth.key).url, range: 5, response: User.self) { result in
@@ -155,6 +159,8 @@ class NetworkClient {
         }
     }
     
+    //MARK: Fetch Student Locations, fetches most recent 100 entries on the API and sends a notification to map and table views.
+    
     class func getStudentLocations(completion: @escaping (Result<[StudentLocation], Error>) -> Void) {
         taskForGETRequest(url: Endpoints.getStudentLocations.url, range: 0, response: LocationResults.self) { result in
             switch result {
@@ -167,8 +173,10 @@ class NetworkClient {
         }
     }
 
-    class func postUserLocation(latitude: Double, longitude: Double, mapString: String, mediaURL: String, completion: @escaping (Result<POSTResponse, Error>) -> Void) {
-        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, range: 0, response: POSTResponse.self, body: UserLocation(firstName: Auth.firstName, lastName: Auth.lastName, latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: mediaURL, uniqueKey: Auth.key)) { result in
+    //MARK: 
+    
+    class func postUserLocation(userPin: UserPinData, completion: @escaping (Result<POSTResponse, Error>) -> Void) {
+        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, range: 0, response: POSTResponse.self, body: UserLocation(firstName: Auth.firstName, lastName: Auth.lastName, latitude: userPin.latitude, longitude: userPin.longitude, mapString: userPin.mapString, mediaURL: userPin.mediaURL, uniqueKey: Auth.key)) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
@@ -180,8 +188,8 @@ class NetworkClient {
         }
     }
     
-    class func putUserLocation(latitude: Double, longitude: Double, mapString: String, mediaURL: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        taskForPUTRequest(url: Endpoints.putStudentLocation(Auth.objectID).url, body: UserLocation(firstName: Auth.firstName, lastName: Auth.lastName, latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: mediaURL, uniqueKey: Auth.key)) { result in
+    class func putUserLocation(userPin: UserPinData, completion: @escaping (Result<Bool, Error>) -> Void) {
+        taskForPUTRequest(url: Endpoints.putStudentLocation(Auth.objectID).url, body: UserLocation(firstName: Auth.firstName, lastName: Auth.lastName, latitude: userPin.latitude, longitude: userPin.longitude, mapString: userPin.mapString, mediaURL: userPin.mediaURL, uniqueKey: Auth.key)) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))

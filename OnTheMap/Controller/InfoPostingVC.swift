@@ -39,9 +39,8 @@ class InfoPostingVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "findLocation") {
             let LocationVC = segue.destination as! LocationVC
-            let location = sender as! CLPlacemark
-            LocationVC.placemark = location
-            LocationVC.link = linkTextField.text ?? ""
+            let pinData = sender as! UserPinData
+            LocationVC.pinData = pinData
         }
     }
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -77,7 +76,14 @@ extension InfoPostingVC {
         case .failure(_):
             Alert.showCouldNotCompileUserLocation(on: self)
         case .success(let placemark):
-            self.performSegue(withIdentifier: "findLocation", sender: placemark)
+            if let coordinate = placemark.location?.coordinate {
+                let city = placemark.locality ?? ""
+                let country = placemark.isoCountryCode ?? ""
+                let mapString = city + ", " + country
+                let mediaURL = linkTextField.text ?? ""
+                let pinData = UserPinData(latitude: coordinate.latitude, longitude: coordinate.longitude, mapString: mapString, mediaURL: mediaURL)
+            self.performSegue(withIdentifier: "findLocation", sender: pinData)
+            }
         }
     }
         

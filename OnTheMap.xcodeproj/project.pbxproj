@@ -17,7 +17,7 @@
 		0870A5D025D41D6B00ADC81C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5CE25D41D6B00ADC81C /* Main.storyboard */; };
 		0870A5D225D41D6F00ADC81C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5D125D41D6F00ADC81C /* Assets.xcassets */; };
 		0870A5D525D41D6F00ADC81C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5D325D41D6F00ADC81C /* LaunchScreen.storyboard */; };
-		0870A5E825D476D100ADC81C /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870A5E725D476D100ADC81C /* LoginButton.swift */; };
+		0870A5E825D476D100ADC81C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870A5E725D476D100ADC81C /* CustomButton.swift */; };
 		0870A5EB25D479D700ADC81C /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870A5EA25D479D700ADC81C /* ColorPalette.swift */; };
 		0870A5F125D4806200ADC81C /* klavika-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0870A5F025D4806200ADC81C /* klavika-bold.otf */; };
 		087574EF25D876D1001E3831 /* StudentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087574EE25D876D1001E3831 /* StudentViewCell.swift */; };
@@ -26,7 +26,7 @@
 		0879519025DFD79F00C9081C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879518F25DFD79F00C9081C /* User.swift */; };
 		0879519325E014B100C9081C /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879519225E014B000C9081C /* UserLocation.swift */; };
 		0879519625E0199E00C9081C /* POSTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879519525E0199E00C9081C /* POSTResponse.swift */; };
-		08E1896E25E160DB0067A6F1 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1896D25E160DB0067A6F1 /* UserModel.swift */; };
+		08964E0525E54A90009743AC /* UserPinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964E0425E54A90009743AC /* UserPinData.swift */; };
 		08F4305E25D5C599009B5D8A /* TableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4305D25D5C599009B5D8A /* TableVC.swift */; };
 		08F4306125D5C5AC009B5D8A /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4306025D5C5AC009B5D8A /* MapVC.swift */; };
 		08F4306425D5C5D3009B5D8A /* InfoPostingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */; };
@@ -49,7 +49,7 @@
 		0870A5D125D41D6F00ADC81C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0870A5D425D41D6F00ADC81C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0870A5D625D41D6F00ADC81C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0870A5E725D476D100ADC81C /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		0870A5E725D476D100ADC81C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		0870A5EA25D479D700ADC81C /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		0870A5F025D4806200ADC81C /* klavika-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "klavika-bold.otf"; sourceTree = "<group>"; };
 		087574EE25D876D1001E3831 /* StudentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewCell.swift; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		0879518F25DFD79F00C9081C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0879519225E014B000C9081C /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		0879519525E0199E00C9081C /* POSTResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POSTResponse.swift; sourceTree = "<group>"; };
-		08E1896D25E160DB0067A6F1 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		08964E0425E54A90009743AC /* UserPinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPinData.swift; sourceTree = "<group>"; };
 		08F4305D25D5C599009B5D8A /* TableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableVC.swift; sourceTree = "<group>"; };
 		08F4306025D5C5AC009B5D8A /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		08F4306325D5C5D3009B5D8A /* InfoPostingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPostingVC.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		0870A5DD25D41D7D00ADC81C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0870A5E725D476D100ADC81C /* LoginButton.swift */,
+				0870A5E725D476D100ADC81C /* CustomButton.swift */,
 				087574EE25D876D1001E3831 /* StudentViewCell.swift */,
 			);
 			path = View;
@@ -165,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				086E2A8625D7337B00F36A7A /* StudentModel.swift */,
-				08E1896D25E160DB0067A6F1 /* UserModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -210,6 +209,7 @@
 			children = (
 				08F4306B25D5D180009B5D8A /* LoginRequest.swift */,
 				0879519225E014B000C9081C /* UserLocation.swift */,
+				08964E0425E54A90009743AC /* UserPinData.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -311,12 +311,12 @@
 				08F4307025D5E22C009B5D8A /* ErrorTypes.swift in Sources */,
 				086E2A8325D72E1800F36A7A /* StudentLocation.swift in Sources */,
 				0870A5CD25D41D6B00ADC81C /* LoginVC.swift in Sources */,
-				0870A5E825D476D100ADC81C /* LoginButton.swift in Sources */,
+				0870A5E825D476D100ADC81C /* CustomButton.swift in Sources */,
 				08F4306C25D5D180009B5D8A /* LoginRequest.swift in Sources */,
-				08E1896E25E160DB0067A6F1 /* UserModel.swift in Sources */,
 				086E2A8025D6D0CB00F36A7A /* Alert.swift in Sources */,
 				08F4305E25D5C599009B5D8A /* TableVC.swift in Sources */,
 				0879518725DEA3D600C9081C /* BaseViewController.swift in Sources */,
+				08964E0525E54A90009743AC /* UserPinData.swift in Sources */,
 				08F4306125D5C5AC009B5D8A /* MapVC.swift in Sources */,
 				0870A5C925D41D6B00ADC81C /* AppDelegate.swift in Sources */,
 				087574EF25D876D1001E3831 /* StudentViewCell.swift in Sources */,

@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 
+
+//MARK:- Custom alert handler that both allows for specific messages and calls Alert view from outside of ViewControllers
+
 struct Alert {
     
     private static func showBasicAlert(on vc: UIViewController, with title: String, message: String) {

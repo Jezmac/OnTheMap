@@ -40,7 +40,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKT-xD-bQc" customClass="LoginButton" customModule="OnTheMap" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKT-xD-bQc" customClass="CustomButton" customModule="OnTheMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="130" width="294" height="45"/>
                                         <color key="backgroundColor" red="0.057406917209999998" green="0.62772893910000005" blue="0.8039464355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -88,7 +88,7 @@
                                 <rect key="frame" x="70" y="760" width="45" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDK-uF-4vv" customClass="LoginButton" customModule="OnTheMap" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDK-uF-4vv" customClass="CustomButton" customModule="OnTheMap" customModuleProvider="target">
                                 <rect key="frame" x="60" y="767" width="294" height="45"/>
                                 <color key="backgroundColor" red="0.057406917209999998" green="0.62772893910000005" blue="0.8039464355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -240,10 +240,10 @@
             </objects>
             <point key="canvasLocation" x="2582.608695652174" y="412.5"/>
         </scene>
-        <!--Main Nav Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="17Q-1o-umb">
             <objects>
-                <navigationController id="Gu0-7Q-4Jh" customClass="MainNavController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="Gu0-7Q-4Jh" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-deselected" id="qxV-aq-clN"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F1c-dy-wzS">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -257,10 +257,10 @@
             </objects>
             <point key="canvasLocation" x="1778" y="413"/>
         </scene>
-        <!--Main Nav Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="0Ke-NA-MUU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rnN-gk-bBU" customClass="MainNavController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rnN-gk-bBU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-deselected" id="Rhk-K4-Dao"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wwP-Lq-RTG">
@@ -276,10 +276,10 @@
             </objects>
             <point key="canvasLocation" x="1778" y="-254"/>
         </scene>
-        <!--Main Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="S8B-lX-M6n">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="3dT-s4-iaK" customClass="MainTabBarController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="3dT-s4-iaK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SSp-VI-R5N">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -322,7 +322,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES" textContentType="url"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoY-gG-31L" userLabel="findLocationButton" customClass="LoginButton" customModule="OnTheMap" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoY-gG-31L" userLabel="findLocationButton" customClass="CustomButton" customModule="OnTheMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="130" width="294" height="45"/>
                                         <color key="backgroundColor" red="0.057406917209999998" green="0.62772893910000005" blue="0.8039464355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -400,7 +400,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HFb-ZY-9Zv">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jo2-Vu-7Mx" userLabel="finishButton" customClass="LoginButton" customModule="OnTheMap" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jo2-Vu-7Mx" userLabel="finishButton" customClass="CustomButton" customModule="OnTheMap" customModuleProvider="target">
                                 <rect key="frame" x="60" y="772" width="294" height="45"/>
                                 <color key="backgroundColor" red="0.057406917209999998" green="0.62772893910000005" blue="0.8039464355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>

@@ -7,7 +7,10 @@
 
 import UIKit
 
-class LoginButton: UIButton {
+
+//MARK:- Custom view for UIButtons used in app
+
+class CustomButton: UIButton {
     
     override func awakeFromNib() {
         super .awakeFromNib()
