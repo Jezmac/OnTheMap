@@ -36,7 +36,6 @@ class LoginVC: UIViewController {
         loginButton.isEnabled = false
         loginButton.alpha = 0.5
         
-        
     }
     
     //MARK: - Actions
@@ -136,16 +135,31 @@ extension LoginVC: UITextFieldDelegate {
         }
         return true
     }
-        
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        loginButton.isEnabled = false
+        loginButton.alpha = 0.5
+        return true
+    }
         
         private func switchTextFieldControl(_ textField: UITextField) {
             switch textField {
             case self.emailTF:
                 self.passwordTF.becomeFirstResponder()
             case self.passwordTF:
-                NetworkClient.login(username: emailTF.text ?? "", password: passwordTF.text ?? "", completion: handleLoginResponse(result:))
+                self.passwordTF.resignFirstResponder()
             default:
                 self.passwordTF.resignFirstResponder()
             }
         }
     }
+
+
+
+
+
+extension UITextField {
+    func changeDoesNotLeadToEmptyString(replacingCharactersIn range: NSRange, with replacementString: String) -> Bool {
+        return (!replacementString.isEmpty || range.length < (text ?? "").count)
+    }
+}
