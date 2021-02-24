@@ -123,10 +123,10 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="LlM-he-Eog" id="QMQ-vQ-IVs"/>
-                        <outlet property="emailTextField" destination="mtR-C4-EMz" id="2rj-Oo-kVP"/>
+                        <outlet property="emailTF" destination="mtR-C4-EMz" id="2rj-Oo-kVP"/>
                         <outlet property="loginButton" destination="SKT-xD-bQc" id="leE-sl-vha"/>
                         <outlet property="loginViaFacebookButton" destination="kDK-uF-4vv" id="Vu7-rt-jGR"/>
-                        <outlet property="passwordTextField" destination="q3q-Go-OdV" id="3gu-Y5-hDO"/>
+                        <outlet property="passwordTF" destination="q3q-Go-OdV" id="3gu-Y5-hDO"/>
                         <outlet property="signUpButton" destination="uhx-Bp-hI1" id="cG1-t3-3eO"/>
                     </connections>
                 </viewController>
