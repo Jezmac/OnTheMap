@@ -20,6 +20,8 @@ class InfoPostingVC: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
 
+    var inactiveTF: UITextField!
+    
     //MARK:- Life Cycle
     
     override func viewDidLoad() {
@@ -107,19 +109,18 @@ extension InfoPostingVC {
 
 extension InfoPostingVC: UITextFieldDelegate {
     
-    
+
     // Since return key type is only .go when both fields contain characters this variable can be used to determine the behaviour of the key press. If it is .next then the other field is set to first responser, if it is .go then the geolocation function is called
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let otherTF = setOtherTF(textField: textField)
         switch textField.returnKeyType {
         case .next:
-            otherTF.becomeFirstResponder()
+            inactiveTF.becomeFirstResponder()
         case .go:
             setGeocoding(true)
             getLocationCoordinates(address: locationTF.text ?? "", completion: self.handleGeocodeResponse(result:))
         default:
-            otherTF.becomeFirstResponder()
+            inactiveTF.becomeFirstResponder()
         }
         return true
     }
@@ -129,8 +130,7 @@ extension InfoPostingVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
         let text = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
-        let otherTF = setOtherTF(textField: textField)
-        if otherTF.text == "" {
+        if inactiveTF.text == "" {
             findLocationButton.isEnabled = false
             findLocationButton.alpha = 0.5
         } else {
@@ -148,8 +148,8 @@ extension InfoPostingVC: UITextFieldDelegate {
     // Checks if both textfields are empty, if they are then the return key is set to next for the selected textfield. If the other textfield has text, then it is set to go instead.
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let otherTF = setOtherTF(textField: textField)
-        if otherTF.text == "" {
+        inactiveTF = setInactiveTF(textField: textField)
+        if inactiveTF.text == "" {
             textField.returnKeyType = .next
         } else {
             textField.returnKeyType = .go
@@ -166,7 +166,7 @@ extension InfoPostingVC: UITextFieldDelegate {
     
     // returns the name of textField not currently in use.
     
-    func setOtherTF(textField: UITextField) -> UITextField {
+    func setInactiveTF(textField: UITextField) -> UITextField {
         let otherTF: UITextField
         if textField == locationTF {
             otherTF = linkTF
