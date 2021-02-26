@@ -35,7 +35,6 @@ class LoginVC: UIViewController {
         clearTextFields()
         loginButton.isEnabled = false
         loginButton.alpha = 0.5
-        
     }
     
     //MARK: - Actions
@@ -46,10 +45,10 @@ class LoginVC: UIViewController {
             UIApplication.shared.open(url)
         }
     }
+    
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
         NetworkClient.login(username: emailTF.text ?? "", password: passwordTF.text ?? "", completion: handleLoginResponse(result:))
-        
     }
     
     func handleLoginResponse(result: Result<Bool, Error>) {
@@ -103,13 +102,23 @@ class LoginVC: UIViewController {
 extension LoginVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switchTextFieldControl(textField)
+        switch textField {
+        case self.emailTF:
+            self.passwordTF.becomeFirstResponder()
+        case self.passwordTF:
+            if loginButton.isEnabled {
+                setLoggingIn(true)
+                NetworkClient.login(username: emailTF.text ?? "", password: passwordTF.text ?? "", completion: handleLoginResponse(result:))
+            }
+            self.passwordTF.resignFirstResponder()
+        default:
+            self.passwordTF.resignFirstResponder()
+        }
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         currentTextField = textField
-        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -141,25 +150,5 @@ extension LoginVC: UITextFieldDelegate {
         loginButton.alpha = 0.5
         return true
     }
-        
-        private func switchTextFieldControl(_ textField: UITextField) {
-            switch textField {
-            case self.emailTF:
-                self.passwordTF.becomeFirstResponder()
-            case self.passwordTF:
-                self.passwordTF.resignFirstResponder()
-            default:
-                self.passwordTF.resignFirstResponder()
-            }
-        }
-    }
-
-
-
-
-
-extension UITextField {
-    func changeDoesNotLeadToEmptyString(replacingCharactersIn range: NSRange, with replacementString: String) -> Bool {
-        return (!replacementString.isEmpty || range.length < (text ?? "").count)
-    }
 }
+        

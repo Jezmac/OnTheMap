@@ -320,7 +320,7 @@
                                             <constraint firstAttribute="height" constant="45" id="gU8-KA-U1f"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES" textContentType="url"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="url"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoY-gG-31L" userLabel="findLocationButton" customClass="CustomButton" customModule="OnTheMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="130" width="294" height="45"/>
@@ -334,7 +334,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="findLocationButtonTapped" destination="G6w-dC-U8b" eventType="touchUpInside" id="Zh8-lM-QJS"/>
+                                            <action selector="findLocationButtonTapped" destination="G6w-dC-U8b" eventType="touchUpInside" id="DPS-fa-oPP"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -379,9 +379,9 @@
                     <connections>
                         <outlet property="activityIndicator" destination="agG-Y6-vgx" id="pz5-ur-UZK"/>
                         <outlet property="cancelBarButton" destination="AsK-cx-CKb" id="7hF-FU-h7a"/>
-                        <outlet property="findLocationButton" destination="RoY-gG-31L" id="mp8-e2-oal"/>
-                        <outlet property="linkTextField" destination="DfH-Ef-8MW" id="3vT-IE-XAf"/>
-                        <outlet property="locationTextField" destination="Eqw-NQ-YSE" id="GoL-4v-961"/>
+                        <outlet property="findLocationButton" destination="RoY-gG-31L" id="CuL-tl-oy2"/>
+                        <outlet property="linkTF" destination="DfH-Ef-8MW" id="1Hb-va-LNp"/>
+                        <outlet property="locationTF" destination="Eqw-NQ-YSE" id="L27-RM-GU4"/>
                         <segue destination="ZOy-fC-1Fr" kind="show" identifier="findLocation" animates="NO" id="8Ee-In-gdQ"/>
                     </connections>
                 </viewController>

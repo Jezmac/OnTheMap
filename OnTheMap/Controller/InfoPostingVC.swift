@@ -14,8 +14,8 @@ class InfoPostingVC: UIViewController {
 
     //MARK:- Outlets
     
-    @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var linkTextField: UITextField!
+    @IBOutlet weak var locationTF: UITextField!
+    @IBOutlet weak var linkTF: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
@@ -24,13 +24,16 @@ class InfoPostingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        locationTF.delegate = self
+        linkTF.delegate = self
+        findLocationButton.isEnabled = false
+        findLocationButton.alpha = 0.5
     }
     
     //MARK:- Actions
     
     @IBAction func findLocationButtonTapped() {
-        guard let address = locationTextField.text else { return }
+        guard let address = locationTF.text else { return }
         setGeocoding(true)
         getLocationCoordinates(address: address, completion: self.handleGeocodeResponse(result:))
         
@@ -80,7 +83,7 @@ extension InfoPostingVC {
                 let city = placemark.locality ?? ""
                 let country = placemark.isoCountryCode ?? ""
                 let mapString = city + ", " + country
-                let mediaURL = linkTextField.text ?? ""
+                let mediaURL = linkTF.text ?? ""
                 let pinData = UserPinData(latitude: coordinate.latitude, longitude: coordinate.longitude, mapString: mapString, mediaURL: mediaURL)
             self.performSegue(withIdentifier: "findLocation", sender: pinData)
             }
@@ -94,10 +97,82 @@ extension InfoPostingVC {
             activityIndicator.stopAnimating()
         }
         findLocationButton.isEnabled = !geocoding
-        linkTextField.isEnabled = !geocoding
-        locationTextField.isEnabled = !geocoding
+        linkTF.isEnabled = !geocoding
+        locationTF.isEnabled = !geocoding
     }
-    
-    
 }
 
+
+//MARK:- TextFieldDelegate + Extension
+
+extension InfoPostingVC: UITextFieldDelegate {
+    
+    
+    // Since return key type is only .go when both fields contain characters this variable can be used to determine the behaviour of the key press. If it is .next then the other field is set to first responser, if it is .go then the geolocation function is called
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let otherTF = setOtherTF(textField: textField)
+        switch textField.returnKeyType {
+        case .next:
+            otherTF.becomeFirstResponder()
+        case .go:
+            setGeocoding(true)
+            getLocationCoordinates(address: locationTF.text ?? "", completion: self.handleGeocodeResponse(result:))
+        default:
+            otherTF.becomeFirstResponder()
+        }
+        return true
+    }
+    
+    // checks contents of the non-editing textField. If it is empty then text entry does not enable the location button. If it does contain text then the button is enabled.
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        let text = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
+        let otherTF = setOtherTF(textField: textField)
+        if otherTF.text == "" {
+            findLocationButton.isEnabled = false
+            findLocationButton.alpha = 0.5
+        } else {
+            if !text.isEmpty {
+                findLocationButton.isEnabled = true
+                findLocationButton.alpha = 1
+            } else {
+                findLocationButton.isEnabled = false
+                findLocationButton.alpha = 0.5
+            }
+        }
+        return true
+    }
+    
+    // Checks if both textfields are empty, if they are then the return key is set to next for the selected textfield. If the other textfield has text, then it is set to go instead.
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let otherTF = setOtherTF(textField: textField)
+        if otherTF.text == "" {
+            textField.returnKeyType = .next
+        } else {
+            textField.returnKeyType = .go
+        }
+    }
+
+    // ensures button is disabled when cleartext button is used.
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        findLocationButton.isEnabled = false
+        findLocationButton.alpha = 0.5
+        return true
+    }
+    
+    // returns the name of textField not currently in use.
+    
+    func setOtherTF(textField: UITextField) -> UITextField {
+        let otherTF: UITextField
+        if textField == locationTF {
+            otherTF = linkTF
+        } else {
+            otherTF = locationTF
+        }
+        return otherTF
+    }
+}
