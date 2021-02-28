@@ -19,6 +19,7 @@ class TableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        selectedIndex = 0
         addObserver()
         tableView.reloadData()
     }

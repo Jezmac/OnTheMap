@@ -16,7 +16,6 @@ class LoginVC: UIViewController {
     @IBOutlet weak var loginViaFacebookButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var currentTextField = UITextField()
     
     // Restrict orientation to portrait only
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -29,47 +28,39 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         emailTF.delegate = self
         passwordTF.delegate = self
-        clearTextFields()
-        loginButton.isEnabled = false
-        loginButton.alpha = 0.5
+        initUI()
     }
     
     //MARK: - Actions
     
-    
+    // Direct user to udacity sign-up page if button is pressed
     @IBAction func signUpTapped(_sender: Any) {
         if let url = URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com") {
             UIApplication.shared.open(url)
         }
     }
     
+    // login function makes login call via network client.
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
         NetworkClient.login(username: emailTF.text ?? "", password: passwordTF.text ?? "", completion: handleLoginResponse(result:))
     }
     
+    // If login succesful both user data and studentLocations are fetched from API. Failure calls the alert handler.
     func handleLoginResponse(result: Result<Bool, Error>) {
         switch result {
-        case .success(_):
-            NetworkClient.getUserData(completion: self.handleGetUserDataResponse(result:))
-            NetworkClient.getStudentLocations { result in
-                if case .success(let response) = result {
-                    for element in response {
-                        if element.mediaURL.isValidURL {
-                            StudentModel.student.append(element)
-                        }
-                    }
-                }
-            }
         case .failure(_):
             Alert.showInvalidIDAlert(on: self)
             setLoggingIn(false)
+        case .success(_):
+            NetworkClient.getUserData(completion: self.handleGetUserDataResponse(result:))
+            NetworkClient.getStudentLocations(completion: BaseViewController.handleGetStudentLocationsResponse(result:))
         }
     }
     
+    // If User data is succesfully received and decoded the main tab bar is presented. Failure results in an alert message.
     func handleGetUserDataResponse(result: Result<User, Error>) {
         switch result {
         case .failure(_):
@@ -81,20 +72,26 @@ class LoginVC: UIViewController {
             mainTBC.modalPresentationStyle = .fullScreen
             present(mainTBC, animated: true, completion: nil)
             setLoggingIn(false)
-            clearTextFields()
+            initUI()
         }
     }
     
-    func clearTextFields() {
+    // Initialise UI
+    func initUI() {
         emailTF.text = ""
         passwordTF.text = ""
+        loginButton.isEnabled = false
+        loginButton.alpha = 0.5
     }
     
+    // Calls activity Indicator and disables UI while neetwork is making request
     func setLoggingIn(_ loggingIn: Bool) {
         if loggingIn {
             activityIndicator.startAnimating()
+            self.view.alpha = 0.5
         } else {
             activityIndicator.stopAnimating()
+            self.view.alpha = 1
         }
         emailTF.isEnabled = !loggingIn
         passwordTF.isEnabled = !loggingIn
@@ -102,6 +99,8 @@ class LoginVC: UIViewController {
         loginViaFacebookButton.isEnabled = !loggingIn
     }
 }
+
+//MARK:- Extension for TextField Behaviours
 
 extension LoginVC: UITextFieldDelegate {
     
@@ -122,7 +121,7 @@ extension LoginVC: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        currentTextField = textField
+        var activeTF = textField
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
