@@ -20,5 +20,14 @@ class CustomButton: UIButton {
     layer.borderColor = ColorPalette.udacityBlue.cgColor
         
     }
+    
+    // Alternative .isEnabled function that sets fades button background even if the color is custom
+    func isEnabled(_ enabled: Bool) {
+        if enabled {
+            self.alpha = 1
+        } else {
+            self.alpha = 0.5
+        }
+        self.isEnabled = enabled
+    }
 }
-

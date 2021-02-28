@@ -16,9 +16,11 @@ class InfoPostingVC: UIViewController {
     
     @IBOutlet weak var locationTF: UITextField!
     @IBOutlet weak var linkTF: UITextField!
-    @IBOutlet weak var findLocationButton: UIButton!
+    @IBOutlet weak var findLocationButton: CustomButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
+    
+    //MARK: Properties
     
     var activeTF: UITextField!
     var inactiveTF: UITextField!
@@ -30,28 +32,36 @@ class InfoPostingVC: UIViewController {
         super.viewDidLoad()
         locationTF.delegate = self
         linkTF.delegate = self
-        enableLocationButton(false)
+        findLocationButton.isEnabled(false)
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.enableUnoccludedTextField()
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.disableUnoccludedTextField()
     }
     
+    
     //MARK:- Actions
     
+    // Checks if link text is a valid URL. Force unwrap is safe as the button is disabled while field is empty. If URL is valid then forward geocode is initiated.
     @IBAction func findLocationButtonTapped() {
-        guard let address = locationTF.text else { return }
-        setGeocoding(true)
-        getLocationCoordinates(address: address, completion: self.handleGeocodeResponse(result:))
-        
+        if !linkTF.text!.isValidURL {
+            Alert.showInvalidURLEntered(on: self)
+        } else {
+            setGeocoding(true)
+        getLocationCoordinates(address: locationTF.text ?? "", completion: self.handleGeocodeResponse(result:))
+        }
     }
     
+    
+    // Segue is prepared with the user's pinData passed over as a variable.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "findLocation") {
             let LocationVC = segue.destination as! LocationVC
@@ -59,17 +69,22 @@ class InfoPostingVC: UIViewController {
             LocationVC.pinData = pinData
         }
     }
+    
+    
+    // Cancel button simply dismisses the modal view.
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+
+//MARK:- Extension for networking tasks and observer setup
+
+
 extension InfoPostingVC {
     
     func getLocationCoordinates(address: String, completion: @escaping (Result<CLPlacemark, NetworkError>) -> Void) {
-        
         CLGeocoder().geocodeAddressString(address) { placemarks, error in
-            
             self.setGeocoding(false)
             if error != nil {
                 completion(.failure(.geocodeError))
@@ -88,7 +103,6 @@ extension InfoPostingVC {
     }
     
     //Show alert if geocode fails, if successful, generate a pinData instance containing information to be used by the network calls in the location view, which is then called and this data passed on.
-    
     func handleGeocodeResponse(result: Result<CLPlacemark, NetworkError>) {
         switch result {
         case .failure(_):
@@ -112,19 +126,9 @@ extension InfoPostingVC {
         } else {
             activityIndicator.stopAnimating()
         }
-        enableLocationButton(!geocoding)
+        findLocationButton.isEnabled(!geocoding)
         linkTF.isEnabled = !geocoding
         locationTF.isEnabled = !geocoding
-    }
-    
-    // Disable and fade findLocationButton
-    func enableLocationButton(_ enabled: Bool) {
-        if enabled {
-            findLocationButton.alpha = 1
-        } else {
-            findLocationButton.alpha = 0.5
-        }
-        findLocationButton.isEnabled = enabled
     }
     
     func enableUnoccludedTextField() {
@@ -167,12 +171,12 @@ extension InfoPostingVC: UITextFieldDelegate {
         
         let text = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
         if inactiveTF.text == "" {
-            enableLocationButton(false)
+            findLocationButton.isEnabled(false)
         } else {
             if !text.isEmpty {
-                enableLocationButton(true)
+                findLocationButton.isEnabled(true)
             } else {
-                enableLocationButton(false)
+                findLocationButton.isEnabled(false)
             }
         }
         return true
@@ -193,15 +197,13 @@ extension InfoPostingVC: UITextFieldDelegate {
     
     
     // ensures button is disabled when cleartext button is used.
-    
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        enableLocationButton(false)
+        findLocationButton.isEnabled(false)
         return true
     }
     
     
     // returns the textField not currently in use.
-    
     func setInactiveTF(textField: UITextField) -> UITextField {
         let inactiveTF: UITextField
         if textField == locationTF {
@@ -212,11 +214,13 @@ extension InfoPostingVC: UITextFieldDelegate {
         return inactiveTF
     }
     
+    
     //MARK:- Keyboard occlusion handler methods
     
     @objc func keyboardWillShow(notification: Notification) {
         checkForOcclusion()
     }
+    
     
     @objc func keyboardWillHide(notification: Notification) {
         if self.view.frame.origin.y != 0.0 {
@@ -225,10 +229,12 @@ extension InfoPostingVC: UITextFieldDelegate {
         self.keyboardHeight = 0.0
     }
     
+    
     @objc func keyboardWillChangeFrame(notification: Notification) {
         let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         self.keyboardHeight = keyboardFrame.height
     }
+    
     
     func checkForOcclusion() {
         let bottomOfTextField = self.view.convert(CGPoint(x: 0, y: self.activeTF!.frame.height), from: activeTF!).y

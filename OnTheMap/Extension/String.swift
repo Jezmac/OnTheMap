@@ -7,6 +7,8 @@
 
 import Foundation
 
+// This extension uses NSDataDetector to check is a given string is a valid URL
+
 extension String {
     var isValidURL: Bool {
         let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)

@@ -11,11 +11,13 @@ class LoginVC: UIViewController {
     
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginButton: CustomButton!
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var loginViaFacebookButton: UIButton!
+    @IBOutlet weak var loginViaFacebookButton: CustomButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var activeTF: UITextField!
+    var inactiveTF: UITextField!
     
     // Restrict orientation to portrait only
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -80,8 +82,7 @@ class LoginVC: UIViewController {
     func initUI() {
         emailTF.text = ""
         passwordTF.text = ""
-        loginButton.isEnabled = false
-        loginButton.alpha = 0.5
+        loginButton.isEnabled(false)
     }
     
     // Calls activity Indicator and disables UI while neetwork is making request
@@ -95,8 +96,8 @@ class LoginVC: UIViewController {
         }
         emailTF.isEnabled = !loggingIn
         passwordTF.isEnabled = !loggingIn
-        loginButton.isEnabled = !loggingIn
-        loginViaFacebookButton.isEnabled = !loggingIn
+        loginButton.isEnabled(!loggingIn)
+        loginViaFacebookButton.isEnabled(!loggingIn)
     }
 }
 
@@ -104,54 +105,61 @@ class LoginVC: UIViewController {
 
 extension LoginVC: UITextFieldDelegate {
     
+    // Since return key type is only .go when both fields contain characters this variable can be used to determine the behaviour of the key press. If it is .next then the other field is set to first responser, if it is .go then the geolocation function is called
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case self.emailTF:
-            self.passwordTF.becomeFirstResponder()
-        case self.passwordTF:
-            if loginButton.isEnabled {
-                setLoggingIn(true)
-                NetworkClient.login(username: emailTF.text ?? "", password: passwordTF.text ?? "", completion: handleLoginResponse(result:))
-            }
-            self.passwordTF.resignFirstResponder()
+        switch textField.returnKeyType {
+        case .next:
+            inactiveTF.becomeFirstResponder()
+        case .go:
+            setLoggingIn(true)
+            NetworkClient.login(username: emailTF.text ?? "", password: passwordTF.text ?? "", completion: handleLoginResponse(result:))
         default:
-            self.passwordTF.resignFirstResponder()
+            inactiveTF.becomeFirstResponder()
         }
         return true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        var activeTF = textField
-    }
-    
+    // checks contents of the non-editing textField. If it is empty then text entry does not enable the location button. If it does contain text then the button is enabled.
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-
+        
         let text = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
-        let otherTextField: UITextField
-        if textField == emailTF {
-            otherTextField = passwordTF
-        } else {
-            otherTextField = emailTF
-        }
-        if otherTextField.text == "" {
-                    loginButton.isEnabled = false
-            loginButton.alpha = 0.5
+        if inactiveTF.text == "" {
+            loginButton.isEnabled(false)
         } else {
             if !text.isEmpty {
-                loginButton.isEnabled = true
-                loginButton.alpha = 1
+                loginButton.isEnabled(true)
             } else {
-                loginButton.isEnabled = false
-                loginButton.alpha = 0.5
+                loginButton.isEnabled(false)
             }
         }
         return true
     }
-
+    
+    // Checks if both textfields are empty, if they are then the return key is set to next for the selected textfield. If the other textfield has text, then it is set to go instead.
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTF = textField
+        inactiveTF = setInactiveTF(textField: textField)
+        if inactiveTF.text == "" {
+            textField.returnKeyType = .next
+        } else {
+            textField.returnKeyType = .go
+        }
+    }
+    
+    // ensures button is disabled when cleartext button is used.
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        loginButton.isEnabled = false
-        loginButton.alpha = 0.5
+        loginButton.isEnabled(false)
         return true
     }
+    
+    // returns the textField not currently in use.
+    func setInactiveTF(textField: UITextField) -> UITextField {
+        let inactiveTF: UITextField
+        if textField == emailTF {
+            inactiveTF = passwordTF
+        } else {
+            inactiveTF = emailTF
+        }
+        return inactiveTF
+    }
 }
-        
