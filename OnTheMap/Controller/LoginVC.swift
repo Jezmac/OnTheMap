@@ -57,7 +57,11 @@ class LoginVC: UIViewController {
             NetworkClient.getUserData(completion: self.handleGetUserDataResponse(result:))
             NetworkClient.getStudentLocations { result in
                 if case .success(let response) = result {
-                    StudentModel.student = response
+                    for element in response {
+                        if element.mediaURL.isValidURL {
+                            StudentModel.student.append(element)
+                        }
+                    }
                 }
             }
         case .failure(_):

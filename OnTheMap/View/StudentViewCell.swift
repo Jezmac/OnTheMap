@@ -25,9 +25,9 @@ class StudentViewCell: UITableViewCell {
     
     func configure(with student: StudentLocation?) {
         if let student = student {
-            nameLabel?.text = student.fullName()
-            urlLabel?.text = student.mediaURL
-            pinImage.image = UIImage(named: "icon_pin")
+                nameLabel?.text = student.fullName()
+                urlLabel?.text = student.mediaURL
+                pinImage.image = UIImage(named: "icon_pin")
         } else {
             nameLabel?.text = "Problem with the data"
         }

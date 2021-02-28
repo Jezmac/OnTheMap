@@ -23,7 +23,11 @@ class BaseViewController: UIViewController {
     @objc func refreshTapped(_ sender: UIBarButtonItem) {
         NetworkClient.getStudentLocations { result in
             if case .success(let students) = result {
-                StudentModel.student = students
+                for element in students {
+                    if element.mediaURL.isValidURL {
+                        StudentModel.student.append(element)
+                    }
+                }
             }
         }
     }

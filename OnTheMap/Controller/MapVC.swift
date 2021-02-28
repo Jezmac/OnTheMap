@@ -56,7 +56,6 @@ extension MapVC {
     // Creates annotation array for MapView
     @objc func addPins(_ sender: Notification) {
         var annotations = [MKAnnotation]()
-        
         // Iterate over the array to call annotation array for each index
         for location in StudentModel.student {
             let annotation = location.getlocationPin()
