@@ -41,4 +41,8 @@ struct Alert {
     static func showInvalidURLEntered(on vc: UIViewController) {
         showBasicAlert(on: vc, with: "The link you have entered is not a valid URL", message: "Please check and try again")
     }
+    
+    static func showLogoutFailure(on vc: UIViewController) {
+        showBasicAlert(on: vc, with: "Could Not Logout", message: "Please log this error")
+    }
 }

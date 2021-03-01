@@ -8,6 +8,7 @@
 import Foundation
 
 class NetworkClient {
+
     
     //MARK:- Struct for storing a variety of authorisation and user data
     private struct Auth {
@@ -18,6 +19,7 @@ class NetworkClient {
         static var lastName = ""
         static var objectID = ""
     }
+    
     
     //MARK:- Enum for creation of endpoints for various Network tasks
     enum Endpoints {
@@ -30,7 +32,6 @@ class NetworkClient {
         case postStudentLocation
         case putStudentLocation(String)
 
-        
         var stringValue: String {
             switch self {
             case .login: return "\(Endpoints.base)/session"
@@ -41,7 +42,6 @@ class NetworkClient {
 
             }
         }
-        
         var url: URL {
             return URL(string: stringValue)!
         }
@@ -50,8 +50,8 @@ class NetworkClient {
     
     //MARK:- Generic Request Functions
     
-    //MARK: POST Request
     
+    //MARK: POST Request
     class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, range: Int, response: ResponseType.Type, body: RequestType, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -82,8 +82,8 @@ class NetworkClient {
         }.resume()
     }
     
-    //MARK: GET Request
     
+    //MARK: GET Request
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, range: Int, response: ResponseType.Type, completion: @escaping (Result<ResponseType, NetworkError>) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error  in
             guard let data = data else {
@@ -108,8 +108,8 @@ class NetworkClient {
         }.resume()
     }
     
-    //MARK: PUT Request
     
+    //MARK: PUT Request
     class func taskForPUTRequest<RequestType: Encodable>(url: URL, body: RequestType, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
@@ -129,13 +129,10 @@ class NetworkClient {
     }
     
     
-    //MARK: DELETE Request
-    
-    
     //MARK:- Requests by type
     
-    //MARK: Login Function, stores student ID as "key" in Auth struct
     
+    //MARK: Login Function, stores student ID as "key" in Auth struct
     class func login(username: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         taskForPOSTRequest(url: Endpoints.login.url, range: 5, response: SessionResponse.self, body: LoginRequest(udacity: LoginDetails(username: username, password: password))) { result in
             switch result {
@@ -148,8 +145,8 @@ class NetworkClient {
         }
     }
     
-    //MARK: Fetch User Data function, stores first and last name in Auth Struct
     
+    //MARK: Fetch User Data function, stores first and last name in Auth Struct
     class func getUserData(completion: @escaping (Result<User, Error>) -> Void) {
         taskForGETRequest(url: Endpoints.getUserData(Auth.key).url, range: 5, response: User.self) { result in
             switch result {
@@ -164,8 +161,8 @@ class NetworkClient {
         }
     }
     
-    //MARK: Fetch Student Locations, fetches most recent 100 entries on the API and sends a notification to map and table views.
     
+    //MARK: Fetch Student Locations, fetches most recent 100 entries on the API and sends a notification to map and table views.
     class func getStudentLocations(completion: @escaping (Result<[StudentLocation], Error>) -> Void) {
         taskForGETRequest(url: Endpoints.getStudentLocations.url, range: 0, response: LocationResults.self) { result in
             switch result {
@@ -178,8 +175,8 @@ class NetworkClient {
         }
     }
 
-    //MARK: 
     
+    //MARK: Post User Location. Receives objectId from API.
     class func postUserLocation(userPin: UserPinData, completion: @escaping (Result<POSTResponse, Error>) -> Void) {
         taskForPOSTRequest(url: Endpoints.postStudentLocation.url, range: 0, response: POSTResponse.self, body: UserLocation(firstName: Auth.firstName, lastName: Auth.lastName, latitude: userPin.latitude, longitude: userPin.longitude, mapString: userPin.mapString, mediaURL: userPin.mediaURL, uniqueKey: Auth.key)) { result in
             switch result {
@@ -192,7 +189,9 @@ class NetworkClient {
             }
         }
     }
+   
     
+    //MARK: Put User Location. Uses Object Id to log new student location with API.
     class func putUserLocation(userPin: UserPinData, completion: @escaping (Result<Bool, Error>) -> Void) {
         taskForPUTRequest(url: Endpoints.putStudentLocation(Auth.objectID).url, body: UserLocation(firstName: Auth.firstName, lastName: Auth.lastName, latitude: userPin.latitude, longitude: userPin.longitude, mapString: userPin.mapString, mediaURL: userPin.mediaURL, uniqueKey: Auth.key)) { result in
             switch result {
@@ -202,14 +201,48 @@ class NetworkClient {
                 completion(.success(true))
                 getStudentLocations { result in
                     if case .success(let students) = result {
+                        StudentModel.student.removeAll()
                         StudentModel.student = students
                     }
                 }
             }
         }
     }
+    
+    //MARK: Logout, makes delete request to API, if it receives a success code response then it deletes the user data in the Auth struct and empties the StudentModel.
+    class func logout(completion: @escaping (Result<Bool,NetworkError>) -> Void) {
+        var request = URLRequest(url: Endpoints.login.url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+          request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode == 200 {
+                    Auth.key = ""
+                    Auth.sessionID = ""
+                    Auth.firstName = ""
+                    Auth.lastName = ""
+                    StudentModel.student.removeAll()
+                    DispatchQueue.main.async {
+                        completion(.success(true))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(.failure(.logoutError))
+                    }
+                }
+            }
+        }.resume()
+    }
 }
 
+//MARK:- Extension for Observer pattern
 
 extension Notification.Name {
     static let newLocationsReceived = Notification.Name("NewLocationsReceived")

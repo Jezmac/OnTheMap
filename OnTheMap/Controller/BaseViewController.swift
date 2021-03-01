@@ -26,6 +26,7 @@ class BaseViewController: UIViewController {
     
     class func handleGetStudentLocationsResponse(result: Result<[StudentLocation], Error>) {
         if case .success(let students) = result {
+            StudentModel.student.removeAll()
             for element in students {
                 if element.mediaURL.isValidURL {
                     StudentModel.student.append(element)
@@ -42,6 +43,13 @@ class BaseViewController: UIViewController {
     }
     
     @objc func logoutTapped(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+        NetworkClient.logout { result in
+            switch result {
+            case .failure(_):
+                Alert.showLogoutFailure(on: self)
+            case .success(_):
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 }

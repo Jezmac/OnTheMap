@@ -119,9 +119,10 @@
 				0870A5C825D41D6B00ADC81C /* AppDelegate.swift */,
 				0870A5CA25D41D6B00ADC81C /* SceneDelegate.swift */,
 				08E8D98B25EBDE7F00387A9B /* Extension */,
-				0870A5DD25D41D7D00ADC81C /* View */,
 				0870A5E025D41D9400ADC81C /* Model */,
+				0870A5DD25D41D7D00ADC81C /* View */,
 				0870A5E125D41DA100ADC81C /* Controller */,
+				0870A5E325D41EA400ADC81C /* Data */,
 				0870A5E225D41DAA00ADC81C /* Assets */,
 			);
 			path = OnTheMap;
@@ -140,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				0870A5E425D41EAB00ADC81C /* Networking */,
-				0870A5E325D41EA400ADC81C /* Data */,
 			);
 			path = Model;
 			sourceTree = "<group>";
