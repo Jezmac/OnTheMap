@@ -5,7 +5,6 @@
 //  Created by Jeremy MacLeod on 12/02/2021.
 //
 
-import Foundation
 import UIKit
 
 
@@ -31,8 +30,8 @@ struct Alert {
         showBasicAlert(on: vc, with: "Could not find data for this user ID on the server", message: "Please check your Udacity account")
     }
     
-    static func showCouldNotCompileUserLocation(on vc: UIViewController) {
-        showBasicAlert(on: vc, with: "Could not compile user data for this location", message:  "Please check all fields have been completed")
+    static func showCouldNotGetUserLocation(on vc: UIViewController) {
+        showBasicAlert(on: vc, with: "No matching location found", message:  "Please check location field for mistakes")
     }
     
     static func showCouldNotPostUserLocation(on vc: UIViewController) {

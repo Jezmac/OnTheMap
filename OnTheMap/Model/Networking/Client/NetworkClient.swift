@@ -127,6 +127,11 @@ class NetworkClient {
             }
         }.resume()
     }
+    
+    
+    //MARK: DELETE Request
+    
+    
     //MARK:- Requests by type
     
     //MARK: Login Function, stores student ID as "key" in Auth struct

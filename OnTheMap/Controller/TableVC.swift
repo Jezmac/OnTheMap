@@ -5,21 +5,23 @@
 //  Created by Jeremy MacLeod on 11/02/2021.
 //
 
-import Foundation
 import UIKit
 
 class TableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var tableView: UITableView!
+    //MARK:- Outlets and properties
+    
+    // UITableViewController cannot be used as I have subclassed UIViewController. Therefore, a tableView reference iss required.
+    @IBOutlet weak var tableView: UITableView!
     var selectedIndex = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
+    //MARK:- LifeCycle
+    
+    
+    // Observer functions are set up as in mapVC.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        selectedIndex = 0
         addObserver()
         tableView.reloadData()
     }
@@ -28,14 +30,18 @@ class TableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
         clearObserver()
     }
     
+    //MARK:- Table view Delegate and DataSource methods
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return StudentModel.student.count
     }
     
+    // Cells are created using the StudentViewCell class from the View group.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentViewCell") as! StudentViewCell
         
@@ -44,6 +50,8 @@ class TableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    
+    // Opens mediaURL for cell selected by user.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let student = StudentModel.student[indexPath.row]
         let url = student.mediaURL
@@ -53,8 +61,12 @@ class TableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+//MARK:- Observer pattern extension
+
+
 extension TableVC {
     
+    // Observer added as with MapVC
     func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateTable(_:)), name: .newLocationsReceived, object: nil)
     }

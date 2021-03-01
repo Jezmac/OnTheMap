@@ -10,11 +10,14 @@ import MapKit
 
 class MapVC: BaseViewController, MKMapViewDelegate {
     
+    //MARK:- Outlets
+    
     
     @IBOutlet private weak var mapView: MKMapView!
 
-    // LifeCycle
+    //MARK:-  LifeCycle
 
+    // Manages observer for datamodel updates
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupObserver()
@@ -22,8 +25,11 @@ class MapVC: BaseViewController, MKMapViewDelegate {
     
     deinit {
         clearObserver()
+        print("MapView has been Cleared from memory for reuse")
     }
     
+    
+    // Manages the appearance of the pins in the mapView.
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
@@ -39,6 +45,8 @@ class MapVC: BaseViewController, MKMapViewDelegate {
         return pinView
     }
     
+    
+    // Opens mediaURL link for pin upon selection by the user
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let subtitle = (view.annotation?.subtitle ?? "") as String?
@@ -67,9 +75,9 @@ extension MapVC {
         }
     }
     
+    // Obsever functions. Toggles mapView to respond when a call to getStudentLocations is succesful.
     func setupObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(addPins(_:)), name: .newLocationsReceived, object: nil)
-        
     }
     
     func clearObserver() {

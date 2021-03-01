@@ -21,7 +21,7 @@ class CustomButton: UIButton {
         
     }
     
-    // Alternative .isEnabled function that sets fades button background even if the color is custom
+    // Alternative .isEnabled function that fades button background even if the color is custom
     func isEnabled(_ enabled: Bool) {
         if enabled {
             self.alpha = 1

@@ -83,20 +83,24 @@ class InfoPostingVC: UIViewController {
 
 extension InfoPostingVC {
     
+    //
     func getLocationCoordinates(address: String, completion: @escaping (Result<CLPlacemark, NetworkError>) -> Void) {
         CLGeocoder().geocodeAddressString(address) { placemarks, error in
             self.setGeocoding(false)
             if error != nil {
+                DispatchQueue.main.async {
                 completion(.failure(.geocodeError))
+                }
             } else {
                 var location: CLPlacemark?
+                // Selects first result from geocode if there are more than one.
                 if let placemarks = placemarks, placemarks.count > 0 {
                     location = placemarks.first
                 }
                 if let location = location {
-                    completion(.success(location))
-                } else {
-                    completion(.failure(.geocodeError))
+                    DispatchQueue.main.async {
+                        completion(.success(location))
+                    }
                 }
             }
         }
@@ -106,12 +110,13 @@ extension InfoPostingVC {
     func handleGeocodeResponse(result: Result<CLPlacemark, NetworkError>) {
         switch result {
         case .failure(_):
-            Alert.showCouldNotCompileUserLocation(on: self)
+            Alert.showCouldNotGetUserLocation(on: self)
         case .success(let placemark):
             if let coordinate = placemark.location?.coordinate {
                 let city = placemark.locality ?? ""
-                let country = placemark.isoCountryCode ?? ""
-                let mapString = city + ", " + country
+                let countryCode = placemark.isoCountryCode ?? ""
+                let country = placemark.country ?? ""
+                let mapString = city + ", " + countryCode + ", " + country
                 let mediaURL = linkTF.text ?? ""
                 let pinData = UserPinData(latitude: coordinate.latitude, longitude: coordinate.longitude, mapString: mapString, mediaURL: mediaURL)
                 self.performSegue(withIdentifier: "findLocation", sender: pinData)
@@ -131,6 +136,7 @@ extension InfoPostingVC {
         locationTF.isEnabled = !geocoding
     }
     
+    // Toggle keyboard observations on/off
     func enableUnoccludedTextField() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
