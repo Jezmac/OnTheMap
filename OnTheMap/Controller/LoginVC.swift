@@ -83,6 +83,7 @@ class LoginVC: UIViewController {
         emailTF.text = ""
         passwordTF.text = ""
         loginButton.isEnabled(false)
+        addTapRecognizer()
     }
     
     // Calls activity Indicator and disables UI while neetwork is making request
@@ -99,7 +100,20 @@ class LoginVC: UIViewController {
         loginButton.isEnabled(!loggingIn)
         loginViaFacebookButton.isEnabled(!loggingIn)
     }
+    
+    
+    func addTapRecognizer() {
+        let tapRecognizer = UITapGestureRecognizer()
+        tapRecognizer.addTarget(self, action: #selector(self.viewTapped))
+        self.view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    @objc func viewTapped() {
+        self.view.endEditing(true)
+    }
 }
+
+
 
 //MARK:- Extension for TextField Behaviours
 
@@ -163,3 +177,4 @@ extension LoginVC: UITextFieldDelegate {
         return inactiveTF
     }
 }
+
