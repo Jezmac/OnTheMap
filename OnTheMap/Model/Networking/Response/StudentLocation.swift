@@ -7,7 +7,7 @@
 
 import MapKit
 
-struct StudentLocation: Codable {
+struct StudentLocation: Codable, Equatable {
     
     let firstName: String
     let lastName: String
@@ -18,8 +18,12 @@ struct StudentLocation: Codable {
     let objectId: String
     let uniqueKey: String
     
+    
+    // Allows for comparison of StudentLocation structs. If full name and mapstring are the same then the comparison  returns a true.
+    static func == (lhs: StudentLocation, rhs: StudentLocation) -> Bool {
+        return lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.mapString == rhs.mapString
+    }
 }
-
 
 extension StudentLocation {
     // Get full name string

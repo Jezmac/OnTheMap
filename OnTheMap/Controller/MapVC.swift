@@ -61,17 +61,18 @@ class MapVC: BaseViewController, MKMapViewDelegate {
 extension MapVC {
     
 
-    // Creates annotation array for MapView
+    // Clears current annotations then creates new annotation array for MapView
     @objc func addPins(_ sender: Notification) {
+        self.mapView.removeAnnotations(mapView.annotations)
         var annotations = [MKAnnotation]()
         // Iterate over the array to call annotation array for each index
-        for location in StudentModel.student {
+        for location in StudentModel.studentArray {
             let annotation = location.getlocationPin()
 
             // Each result is added to the annotations array
             annotations.append(annotation)
             // Then the updated array is added to the map
-            self.mapView.addAnnotations(annotations)
+            mapView.addAnnotations(annotations)
         }
     }
     

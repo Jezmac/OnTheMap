@@ -199,12 +199,7 @@ class NetworkClient {
                 completion(.failure(error))
             case .success(_):
                 completion(.success(true))
-                getStudentLocations { result in
-                    if case .success(let students) = result {
-                        StudentModel.student.removeAll()
-                        StudentModel.student = students
-                    }
-                }
+                getStudentLocations(completion: BaseViewController.handleGetStudentLocationsResponse(result:))
             }
         }
     }
@@ -228,7 +223,7 @@ class NetworkClient {
                     Auth.sessionID = ""
                     Auth.firstName = ""
                     Auth.lastName = ""
-                    StudentModel.student.removeAll()
+                    StudentModel.studentArray.removeAll()
                     DispatchQueue.main.async {
                         completion(.success(true))
                     }

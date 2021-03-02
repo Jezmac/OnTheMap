@@ -38,14 +38,14 @@ class TableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return StudentModel.student.count
+        return StudentModel.studentArray.count
     }
     
     // Cells are created using the StudentViewCell class from the View group.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentViewCell") as! StudentViewCell
         
-        let student = StudentModel.student[indexPath.row]
+        let student = StudentModel.studentArray[indexPath.row]
         cell.configure(with: student)
         return cell
     }
@@ -53,7 +53,7 @@ class TableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Opens mediaURL for cell selected by user.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let student = StudentModel.student[indexPath.row]
+        let student = StudentModel.studentArray[indexPath.row]
         let url = student.mediaURL
         if let url = URL(string: url) {
             UIApplication.shared.open(url)

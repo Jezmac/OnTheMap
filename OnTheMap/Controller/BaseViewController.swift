@@ -24,15 +24,28 @@ class BaseViewController: UIViewController {
         NetworkClient.getStudentLocations(completion: BaseViewController.handleGetStudentLocationsResponse(result:))
     }
     
+    
+    // Clear current StudentArray, then remove all duplicates from the StudentLocation struct from API. Then only add those with a valid url and full name to the StudentModel.
     class func handleGetStudentLocationsResponse(result: Result<[StudentLocation], Error>) {
         if case .success(let students) = result {
-            StudentModel.student.removeAll()
-            for element in students {
-                if element.mediaURL.isValidURL {
-                    StudentModel.student.append(element)
+            StudentModel.studentArray.removeAll()
+            let uniqueStudents = unique(elements: students)
+            for element in uniqueStudents {
+                if element.mediaURL.isValidURL && element.firstName != "" {
+                    StudentModel.studentArray.append(element)
                 }
             }
         }
+    }
+    
+    class func unique(elements: [StudentLocation]) -> [StudentLocation] {
+        var uniqueElements = [StudentLocation]()
+        for StudentLocation in elements {
+            if !uniqueElements.contains(StudentLocation) {
+                uniqueElements.append(StudentLocation)
+            }
+        }
+        return uniqueElements
     }
     
     @objc func addLocationTapped(_ sender: UIBarButtonItem) {
