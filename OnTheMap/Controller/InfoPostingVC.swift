@@ -33,6 +33,7 @@ class InfoPostingVC: UIViewController {
         locationTF.delegate = self
         linkTF.delegate = self
         findLocationButton.isEnabled(false)
+        addTapRecognizer()
     }
     
     
@@ -50,13 +51,13 @@ class InfoPostingVC: UIViewController {
     
     //MARK:- Actions
     
-    // Checks if link text is a valid URL. Force unwrap is safe as the button is disabled while field is empty. If URL is valid then forward geocode is initiated.
+    // Checks if link text is a valid URL. If URL is valid then forward geocode is initiated.  Force unwrap is safe as the button is disabled while fields are empty
     @IBAction func findLocationButtonTapped() {
         if !linkTF.text!.isValidURL {
             Alert.showInvalidURLEntered(on: self)
         } else {
             setGeocoding(true)
-        getLocationCoordinates(address: locationTF.text ?? "", completion: self.handleGeocodeResponse(result:))
+        getLocationCoordinates(address: locationTF.text!, completion: self.handleGeocodeResponse(result:))
         }
     }
     
@@ -106,23 +107,36 @@ extension InfoPostingVC {
         }
     }
     
-    //Show alert if geocode fails, if successful, generate a pinData instance containing information to be used by the network calls in the location view, which is then called and this data passed on.
+    //Show alert if geocode fails, if successful, generate a pinData instance containing information to be used by the network calls in the location view, which is then called and this data passed on. As this function cannot be called if the linkTF is empty I have force unwrapped it.
     func handleGeocodeResponse(result: Result<CLPlacemark, NetworkError>) {
         switch result {
         case .failure(_):
             Alert.showCouldNotGetUserLocation(on: self)
         case .success(let placemark):
             if let coordinate = placemark.location?.coordinate {
-                let city = placemark.locality ?? ""
-                let countryCode = placemark.isoCountryCode ?? ""
-                let country = placemark.country ?? ""
-                let mapString = city + ", " + countryCode + ", " + country
-                let mediaURL = linkTF.text ?? ""
-                let pinData = UserPinData(latitude: coordinate.latitude, longitude: coordinate.longitude, mapString: mapString, mediaURL: mediaURL)
+                let pinData = UserPinData(latitude: coordinate.latitude, longitude: coordinate.longitude, mapString: makeMapString(placemark: placemark), mediaURL: linkTF.text!)
                 self.performSegue(withIdentifier: "findLocation", sender: pinData)
             }
         }
     }
+    
+    // Takes placemark and generates a reasonably legible mapstring depending on the contents
+    func makeMapString(placemark: CLPlacemark) -> String {
+        let mapString: String
+        var city = placemark.locality ?? ""
+        if city == "" {
+            city = placemark.name ?? ""
+        }
+        let county = placemark.administrativeArea ?? ""
+        let country = placemark.country ?? ""
+        if county != country {
+            mapString = city + ", " + county + ", " + country
+        } else {
+            mapString = city + ", " + country
+        }
+        return mapString
+    }
+    
     
     // Disable/enable controls and show/hide activity indicator
     func setGeocoding(_ geocoding: Bool) {
@@ -147,6 +161,16 @@ extension InfoPostingVC {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    func addTapRecognizer() {
+        let tapRecognizer = UITapGestureRecognizer()
+        tapRecognizer.addTarget(self, action: #selector(self.viewTapped))
+        self.view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    @objc func viewTapped() {
+        self.view.endEditing(true)
     }
 }
 
