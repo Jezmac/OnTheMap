@@ -142,8 +142,10 @@ extension InfoPostingVC {
     func setGeocoding(_ geocoding: Bool) {
         if geocoding {
             activityIndicator.startAnimating()
+            view.alpha = 0.5
         } else {
             activityIndicator.stopAnimating()
+            view.alpha = 1
         }
         findLocationButton.isEnabled(!geocoding)
         linkTF.isEnabled = !geocoding
