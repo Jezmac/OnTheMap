@@ -54,8 +54,14 @@ class TableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     // Opens mediaURL for cell selected by user.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let student = StudentModel.studentArray[indexPath.row]
-        let url = student.mediaURL
-        if let url = URL(string: url) {
+        let urlString = student.mediaURL
+        let myURLString: String
+        if urlString.hasPrefix("https://") || urlString.hasPrefix("http://"){
+                myURLString = urlString
+            } else {
+                myURLString = "http://\(urlString)"
+            }
+        if let url = URL(string: myURLString) {
             UIApplication.shared.open(url)
         }
     }

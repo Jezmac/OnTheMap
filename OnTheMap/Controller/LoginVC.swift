@@ -12,6 +12,9 @@ import FacebookCore
 
 class LoginVC: UIViewController {
     
+    
+    //MARK: Outlets
+    
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var loginButton: CustomButton!
@@ -19,9 +22,13 @@ class LoginVC: UIViewController {
     @IBOutlet weak var loginViaFacebookButton: CustomButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    
+    //MARK: Properties
+    
     var activeTF: UITextField!
     var inactiveTF: UITextField!
     let fbLoginManager = LoginManager()
+
     
     // Restrict orientation to portrait only
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -32,53 +39,47 @@ class LoginVC: UIViewController {
         }
     }
     
+    //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTF.delegate = self
         passwordTF.delegate = self
         initUI()
-        if let token = AccessToken.current,
-                !token.isExpired {
-                // User is logged in, do work such as go to next view controller.
-            }
     }
+    
     
     //MARK: - Actions
     
     
+    // Calls method for facebook authentication.
     @IBAction func fbLoginTapped(_ sender: Any) {
             fbLogin()
     }
     
-    func fbLogin() {
-        fbLoginManager.logOut()
-        fbLoginManager.logIn(permissions: [ "public_profile", "email"], from: self) { result, error in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-            guard let result = result, !result.isCancelled else {
-                print("user cancelled Login.")
-                return
-            }
-            Profile.loadCurrentProfile { (profile, error) in
-                print("\(Profile.current?.userID ?? "noID")")
-            }
-        }
-    }
-    
-    // Direct user to udacity sign-up page if button is pressed
+
+    // Direct user to udacity sign-up page if button is pressed.
     @IBAction func signUpTapped(_sender: Any) {
         if let url = URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com") {
             UIApplication.shared.open(url)
         }
     }
     
+    
     // login function makes login call via network client.
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
         NetworkClient.login(username: emailTF.text ?? "", password: passwordTF.text ?? "", completion: handleLoginResponse(result:))
     }
+    
+    
+    // Tap outside of textFields dismisses UIKeyboard if active.
+    @objc func viewTapped() {
+        self.view.endEditing(true)
+    }
+    
+    
+    //MARK:- Methods
+    
     
     // If login succesful both user data and studentLocations are fetched from API. Failure calls the alert handler.
     func handleLoginResponse(result: Result<Bool, Error>) {
@@ -88,7 +89,7 @@ class LoginVC: UIViewController {
             setLoggingIn(false)
         case .success(_):
             NetworkClient.getUserData(completion: self.handleGetUserDataResponse(result:))
-            NetworkClient.getStudentLocations(completion: BaseViewController.handleGetStudentLocationsResponse(result:))
+            NetworkClient.getStudentLocations(completion: self.handleGetStudentLocationsResponse(result:))
         }
     }
     
@@ -108,6 +109,38 @@ class LoginVC: UIViewController {
         }
     }
     
+    
+    func handleGetStudentLocationsResponse(result: Result<[StudentLocation], Error>) {
+        switch result {
+        case .success(let students):
+            StudentModel.studentArray.removeAll()
+            StudentModel.studentArray = BaseViewController.cleanArray(elements: students)
+        case .failure(_):
+            Alert.showCouldNotGetStudentLocations(on: self)
+        }
+    }
+    
+    
+    // Calls facebook authentication SDK. Gives an alert message if succesful explaining that the feature cannot be fully implemented at this time.
+    func fbLogin() {
+        fbLoginManager.logOut()
+        fbLoginManager.logIn(permissions: [ "public_profile", "email"], from: self) { result, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            guard let result = result, !result.isCancelled else {
+                print("user cancelled Login.")
+                return
+            }
+            Profile.loadCurrentProfile { (profile, error) in
+                Alert.showFBLoginSuccess(on: self, user: Profile.current?.name ?? "User")
+                self.fbLoginManager.logOut()
+            }
+        }
+    }
+    
+    
     // Initialise UI
     func initUI() {
         emailTF.text = ""
@@ -115,6 +148,7 @@ class LoginVC: UIViewController {
         loginButton.isEnabled(false)
         addTapRecognizer()
     }
+    
     
     // Calls activity Indicator and disables UI while neetwork is making request
     func setLoggingIn(_ loggingIn: Bool) {
@@ -132,17 +166,13 @@ class LoginVC: UIViewController {
     }
     
     
+    // Registers screentaps so keyboard can be dismissed when user taps outside of textFields.
     func addTapRecognizer() {
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: #selector(self.viewTapped))
         self.view.addGestureRecognizer(tapRecognizer)
     }
-    
-    @objc func viewTapped() {
-        self.view.endEditing(true)
-    }
 }
-
 
 
 //MARK:- Extension for TextField Behaviours

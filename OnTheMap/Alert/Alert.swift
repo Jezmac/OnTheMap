@@ -30,6 +30,10 @@ struct Alert {
         showBasicAlert(on: vc, with: "Could not find data for this user ID on the server", message: "Please check your Udacity account")
     }
     
+    static func showCouldNotGetStudentLocations(on vc: UIViewController) {
+        showBasicAlert(on: vc, with: "Could not download data from the server", message: "Please check network connection and try again")
+    }
+    
     static func showCouldNotGetUserLocation(on vc: UIViewController) {
         showBasicAlert(on: vc, with: "No matching location found", message:  "Please check location field for mistakes")
     }
@@ -44,5 +48,9 @@ struct Alert {
     
     static func showLogoutFailure(on vc: UIViewController) {
         showBasicAlert(on: vc, with: "Could Not Logout", message: "Please log this error")
+    }
+    
+    static func showFBLoginSuccess(on vc: UIViewController, user: String) {
+        showBasicAlert(on: vc, with: "Hello \(user)!", message: "Your login was succesful but due to API limitations we cannot provide access to the functionality of this app. You will now be logged out again.")
     }
 }

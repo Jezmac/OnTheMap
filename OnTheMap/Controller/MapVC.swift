@@ -14,9 +14,9 @@ class MapVC: BaseViewController, MKMapViewDelegate {
     
     
     @IBOutlet private weak var mapView: MKMapView!
-
+    
     //MARK:-  LifeCycle
-
+    
     // Manages observer for datamodel updates
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,8 +50,16 @@ class MapVC: BaseViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let subtitle = (view.annotation?.subtitle ?? "") as String?
-            if let url = URL(string: subtitle!) {
-            UIApplication.shared.open(url)
+            if let urlString = subtitle {
+                let myURLString: String
+                if urlString.hasPrefix("https://") || urlString.hasPrefix("http://"){
+                    myURLString = urlString
+                } else {
+                    myURLString = "http://\(urlString)"
+                }
+                if let url = URL(string: myURLString) {
+                    UIApplication.shared.open(url)
+                }
             }
         }
     }
@@ -60,7 +68,7 @@ class MapVC: BaseViewController, MKMapViewDelegate {
 
 extension MapVC {
     
-
+    
     // Clears current annotations then creates new annotation array for MapView
     @objc func addPins(_ sender: Notification) {
         self.mapView.removeAnnotations(mapView.annotations)
@@ -68,7 +76,7 @@ extension MapVC {
         // Iterate over the array to call annotation array for each index
         for location in StudentModel.studentArray {
             let annotation = location.getlocationPin()
-
+            
             // Each result is added to the annotations array
             annotations.append(annotation)
             // Then the updated array is added to the map

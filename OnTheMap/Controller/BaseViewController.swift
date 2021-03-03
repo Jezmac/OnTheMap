@@ -8,11 +8,16 @@
 import Foundation
 import UIKit
 
+
+// Subclass for VCs in tab view, containing shared functions.
 class BaseViewController: UIViewController {
     
+    
+    //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Create navigation bar items
         let refreshButton = UIBarButtonItem(image: UIImage(named: "icon_refresh"), style: .plain, target: self, action: #selector(refreshTapped))
         let addLocationButton = UIBarButtonItem(image: UIImage(named: "icon_addpin"), style: .plain, target: self, action: #selector(addLocationTapped))
         navigationItem.rightBarButtonItems = [addLocationButton, refreshButton]
@@ -20,41 +25,33 @@ class BaseViewController: UIViewController {
         
     }
     
+    
+    //MARK:- Actions
+    
+    // Refresh button calls network client to update student locations.
     @objc func refreshTapped(_ sender: UIBarButtonItem) {
         NetworkClient.getStudentLocations(completion: BaseViewController.handleGetStudentLocationsResponse(result:))
     }
     
     
-    // Clear current StudentArray, then remove all duplicates from the StudentLocation struct from API. Then only add those with a valid url and full name to the StudentModel.
+    // Clear current StudentArray, replace with new array. Shows alert if download of new locations fails.
     class func handleGetStudentLocationsResponse(result: Result<[StudentLocation], Error>) {
         if case .success(let students) = result {
             StudentModel.studentArray.removeAll()
-            let uniqueStudents = unique(elements: students)
-            for element in uniqueStudents {
-                if element.mediaURL.isValidURL && element.firstName != "" {
-                    StudentModel.studentArray.append(element)
-                }
-            }
+            StudentModel.studentArray = BaseViewController.cleanArray(elements: students)
         }
     }
     
-    class func unique(elements: [StudentLocation]) -> [StudentLocation] {
-        var uniqueElements = [StudentLocation]()
-        for StudentLocation in elements {
-            if !uniqueElements.contains(StudentLocation) {
-                uniqueElements.append(StudentLocation)
-            }
-        }
-        return uniqueElements
-    }
     
+    // Calls navigation stack for InfoPostingVC.
     @objc func addLocationTapped(_ sender: UIBarButtonItem) {
-        
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let navigationVC = mainStoryboard.instantiateViewController(withIdentifier: "InfoPostingNVC")
         present(navigationVC, animated: true, completion: nil)
     }
     
+    
+    // Calls logout function in Newtwork client.
     @objc func logoutTapped(_ sender: UIBarButtonItem) {
         NetworkClient.logout { result in
             switch result {
@@ -64,5 +61,18 @@ class BaseViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         }
+    }
+    
+    //MARK:- Method for cleaning the StudentLocations array.
+    
+    // Removes all duplicates from the StudentLocation struct and returns a new array containing only those with a valid url and full name.
+    static func cleanArray(elements: [StudentLocation]) -> [StudentLocation] {
+        var uniqueElements = [StudentLocation]()
+        for element in elements {
+            if !uniqueElements.contains(element) && element.mediaURL.isValidURL && element.firstName != "" {
+                uniqueElements.append(element)
+            }
+        }
+        return uniqueElements
     }
 }
