@@ -37,29 +37,35 @@ class MapVC: BaseViewController, MKMapViewDelegate {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
             pinView!.pinTintColor = .red
-            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            pinView!.rightCalloutAccessoryView?.isHidden = true
         } else {
             pinView!.annotation = annotation
         }
         return pinView
     }
     
+    // adds and removes a gesture recognizer when the pin is tapped
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let tapRecognizer = UITapGestureRecognizer(target: self,  action:#selector(calloutTapped(sender:)))
+        view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        view.removeGestureRecognizer(view.gestureRecognizers!.first!)
+    }
+    
     
     // Opens mediaURL link for pin upon selection by the user
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            let subtitle = (view.annotation?.subtitle ?? "") as String?
-            if let urlString = subtitle {
-                let myURLString: String
-                if urlString.hasPrefix("https://") || urlString.hasPrefix("http://"){
-                    myURLString = urlString
-                } else {
-                    myURLString = "http://\(urlString)"
-                }
-                if let url = URL(string: myURLString) {
-                    UIApplication.shared.open(url)
-                }
+    @objc func calloutTapped(sender:UITapGestureRecognizer) {
+        let view = sender.view as! MKAnnotationView
+        if let urlString = view.annotation?.subtitle as? String {
+            let myURLString: String
+            if urlString.hasPrefix("https://") || urlString.hasPrefix("http://"){
+                myURLString = urlString
+            } else {
+                myURLString = "http://\(urlString)"
+            }
+            if let url = URL(string: myURLString) {
+                UIApplication.shared.open(url)
             }
         }
     }
@@ -93,5 +99,3 @@ extension MapVC {
         NotificationCenter.default.removeObserver(self)
     }
 }
-
-
