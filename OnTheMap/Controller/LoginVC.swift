@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import FacebookLogin
+import FacebookCore
 
 class LoginVC: UIViewController {
     
@@ -18,6 +21,7 @@ class LoginVC: UIViewController {
     
     var activeTF: UITextField!
     var inactiveTF: UITextField!
+    let fbLoginManager = LoginManager()
     
     // Restrict orientation to portrait only
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -33,9 +37,35 @@ class LoginVC: UIViewController {
         emailTF.delegate = self
         passwordTF.delegate = self
         initUI()
+        if let token = AccessToken.current,
+                !token.isExpired {
+                // User is logged in, do work such as go to next view controller.
+            }
     }
     
     //MARK: - Actions
+    
+    
+    @IBAction func fbLoginTapped(_ sender: Any) {
+            fbLogin()
+    }
+    
+    func fbLogin() {
+        fbLoginManager.logOut()
+        fbLoginManager.logIn(permissions: [ "public_profile", "email"], from: self) { result, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            guard let result = result, !result.isCancelled else {
+                print("user cancelled Login.")
+                return
+            }
+            Profile.loadCurrentProfile { (profile, error) in
+                print("\(Profile.current?.userID ?? "noID")")
+            }
+        }
+    }
     
     // Direct user to udacity sign-up page if button is pressed
     @IBAction func signUpTapped(_sender: Any) {
