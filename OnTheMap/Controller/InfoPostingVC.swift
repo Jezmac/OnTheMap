@@ -22,8 +22,8 @@ class InfoPostingVC: UIViewController {
     
     //MARK: Properties
     
-    var activeTF: UITextField!
-    var inactiveTF: UITextField!
+    weak var activeTF: UITextField!
+    weak var inactiveTF: UITextField!
     var keyboardHeight: CGFloat!
     
     //MARK:- Life Cycle
@@ -86,8 +86,8 @@ extension InfoPostingVC {
     
     //
     func getLocationCoordinates(address: String, completion: @escaping (Result<CLPlacemark, NetworkError>) -> Void) {
-        CLGeocoder().geocodeAddressString(address) { placemarks, error in
-            self.setGeocoding(false)
+        CLGeocoder().geocodeAddressString(address) { [weak self] placemarks, error in
+            self?.setGeocoding(false)
             if error != nil {
                 DispatchQueue.main.async {
                 completion(.failure(.geocodeError))
@@ -182,7 +182,6 @@ extension InfoPostingVC: UITextFieldDelegate {
     
     
     // Since return key type is only .go when both fields contain characters this variable can be used to determine the behaviour of the key press. If it is .next then the other field is set to first responser, if it is .go then the geolocation function is called
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField.returnKeyType {
         case .next:
@@ -198,7 +197,6 @@ extension InfoPostingVC: UITextFieldDelegate {
     
     
     // checks contents of the non-editing textField. If it is empty then text entry does not enable the location button. If it does contain text then the button is enabled.
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let text = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
@@ -216,7 +214,6 @@ extension InfoPostingVC: UITextFieldDelegate {
     
     
     // Checks if both textfields are empty, if they are then the return key is set to next for the selected textfield. If the other textfield has text, then it is set to go instead.
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTF = textField
         inactiveTF = setInactiveTF(textField: textField)

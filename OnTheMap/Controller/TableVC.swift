@@ -43,7 +43,7 @@ class TableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Cells are created using the StudentViewCell class from the View group.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentViewCell") as! StudentViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentViewCell", for: indexPath) as! StudentViewCell
         
         let student = StudentModel.studentArray[indexPath.row]
         cell.configure(with: student)

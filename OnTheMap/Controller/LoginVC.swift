@@ -12,7 +12,6 @@ import FacebookCore
 
 class LoginVC: UIViewController {
     
-    
     //MARK: Outlets
     
     @IBOutlet weak var emailTF: UITextField!
@@ -25,8 +24,8 @@ class LoginVC: UIViewController {
     
     //MARK: Properties
     
-    var activeTF: UITextField!
-    var inactiveTF: UITextField!
+    weak var activeTF: UITextField!
+    weak var inactiveTF: UITextField!
     let fbLoginManager = LoginManager()
 
     
@@ -40,6 +39,8 @@ class LoginVC: UIViewController {
     }
     
     //MARK: Lifecycle
+    
+    // Set textField delegates and initialise the UI
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTF.delegate = self
@@ -124,7 +125,7 @@ class LoginVC: UIViewController {
     // Calls facebook authentication SDK. Gives an alert message if succesful explaining that the feature cannot be fully implemented at this time.
     func fbLogin() {
         fbLoginManager.logOut()
-        fbLoginManager.logIn(permissions: [ "public_profile", "email"], from: self) { result, error in
+        fbLoginManager.logIn(permissions: [ "public_profile", "email"], from: self) { [weak self] result, error in
             guard error == nil else {
                 print(error!.localizedDescription)
                 return
@@ -134,8 +135,9 @@ class LoginVC: UIViewController {
                 return
             }
             Profile.loadCurrentProfile { (profile, error) in
-                Alert.showFBLoginSuccess(on: self, user: Profile.current?.name ?? "User")
-                self.fbLoginManager.logOut()
+                guard let vc = self else { return }
+                Alert.showFBLoginSuccess(on: vc, user: Profile.current?.name ?? "User")
+                vc.fbLoginManager.logOut()
             }
         }
     }
