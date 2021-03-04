@@ -84,7 +84,7 @@ class InfoPostingVC: UIViewController {
 
 extension InfoPostingVC {
     
-    //
+    // Passes error if geocode fails. If succesful passes the first location received to the completion handler.
     func getLocationCoordinates(address: String, completion: @escaping (Result<CLPlacemark, NetworkError>) -> Void) {
         CLGeocoder().geocodeAddressString(address) { [weak self] placemarks, error in
             self?.setGeocoding(false)

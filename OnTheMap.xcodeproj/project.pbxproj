@@ -28,7 +28,6 @@
 		0879519625E0199E00C9081C /* POSTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879519525E0199E00C9081C /* POSTResponse.swift */; };
 		08964E0525E54A90009743AC /* UserPinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964E0425E54A90009743AC /* UserPinData.swift */; };
 		08E2B19925EFE48A0088CAF2 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 08E2B19825EFE48A0088CAF2 /* FacebookLogin */; };
-		08E8D98525E9A01100387A9B /* FormTFDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8D98425E9A01100387A9B /* FormTFDelegate.swift */; };
 		08E8D98825EA88BF00387A9B /* OcclusionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8D98725EA88BF00387A9B /* OcclusionExtension.swift */; };
 		08E8D98D25EBDE9800387A9B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8D98C25EBDE9800387A9B /* String.swift */; };
 		08F4305E25D5C599009B5D8A /* TableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4305D25D5C599009B5D8A /* TableVC.swift */; };
@@ -63,7 +62,6 @@
 		0879519225E014B000C9081C /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		0879519525E0199E00C9081C /* POSTResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POSTResponse.swift; sourceTree = "<group>"; };
 		08964E0425E54A90009743AC /* UserPinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPinData.swift; sourceTree = "<group>"; };
-		08E8D98425E9A01100387A9B /* FormTFDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTFDelegate.swift; sourceTree = "<group>"; };
 		08E8D98725EA88BF00387A9B /* OcclusionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OcclusionExtension.swift; sourceTree = "<group>"; };
 		08E8D98C25EBDE9800387A9B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		08F4305D25D5C599009B5D8A /* TableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableVC.swift; sourceTree = "<group>"; };
@@ -209,7 +207,6 @@
 		08E8D98325E99FE200387A9B /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
-				08E8D98425E9A01100387A9B /* FormTFDelegate.swift */,
 				08E8D98725EA88BF00387A9B /* OcclusionExtension.swift */,
 			);
 			name = Delegate;
@@ -357,7 +354,6 @@
 				087574EF25D876D1001E3831 /* StudentViewCell.swift in Sources */,
 				08E8D98825EA88BF00387A9B /* OcclusionExtension.swift in Sources */,
 				0870A5CB25D41D6B00ADC81C /* SceneDelegate.swift in Sources */,
-				08E8D98525E9A01100387A9B /* FormTFDelegate.swift in Sources */,
 				086E2A8B25D73AAD00F36A7A /* LocationResults.swift in Sources */,
 				08F4306425D5C5D3009B5D8A /* InfoPostingVC.swift in Sources */,
 				0879519325E014B100C9081C /* UserLocation.swift in Sources */,
